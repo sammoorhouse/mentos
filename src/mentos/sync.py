@@ -84,12 +84,16 @@ def sync_all(conn, token: str) -> None:
 
     last_sync = get_last_sync(conn)
     if last_sync:
-        logger.info("Syncing transactions since %s", last_sync)
+        # small lookback to catch delayed/late transactions
+        last_sync_dt = _parse_dt(last_sync) - timedelta(days=2)
+        last_sync = last_sync_dt.isoformat()
+        logger.info("Syncing transactions since %s (lookback)", last_sync)
     else:
         # Monzo can require verification for longer history; default to last 30 days on first sync
         last_sync = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
         logger.info("No prior sync. Fetching last 30 days since %s", last_sync)
 
+    max_seen_created = None
     for acc in accounts.get("accounts", []):
         account_id = acc.get("id")
         if not account_id:
@@ -121,6 +125,14 @@ def sync_all(conn, token: str) -> None:
                 merchant = tx.get("merchant")
                 if isinstance(merchant, dict):
                     merchant_name = merchant.get("name")
+                created = tx.get("created")
+                if created:
+                    try:
+                        created_dt = _parse_dt(created)
+                        if max_seen_created is None or created_dt > max_seen_created:
+                            max_seen_created = created_dt
+                    except Exception:
+                        pass
                 conn.execute(
                     """
                     INSERT OR REPLACE INTO transactions (
@@ -155,7 +167,10 @@ def sync_all(conn, token: str) -> None:
                 except Exception:
                     pass
 
-    update_last_sync(conn, datetime.now(timezone.utc).isoformat())
+    if max_seen_created is not None:
+        update_last_sync(conn, max_seen_created.isoformat())
+    else:
+        update_last_sync(conn, datetime.now(timezone.utc).isoformat())
 
     retention = 14
     prune_raw_events(conn, retention)

@@ -149,23 +149,35 @@ def cmd_run(args) -> None:
         poll_minutes = 5
 
     logger.info("mentos loop starting")
+    last_poll_key = None
+    last_sweep_key = None
+    last_report_key = None
+    last_monthly_key = None
     while True:
         now = datetime.now(tz)
 
-        if now.minute % poll_minutes == 0 and now.second < 3:
+        poll_key = now.strftime("%Y-%m-%d %H:%M")
+        if now.minute % poll_minutes == 0 and last_poll_key != poll_key:
             poll_and_aggregate(conn, token)
+            last_poll_key = poll_key
 
         # Daily sweep at 00:05
-        if now.hour == 0 and now.minute == 5:
+        sweep_key = f"{now.strftime('%Y-%m-%d')} 00:05"
+        if now.hour == 0 and now.minute == 5 and last_sweep_key != sweep_key:
             daily_sweep(conn, tz, token)
+            last_sweep_key = sweep_key
 
         # Nightly report at 00:10
-        if now.hour == 0 and now.minute == 10:
+        report_key = f"{now.strftime('%Y-%m-%d')} 00:10"
+        if now.hour == 0 and now.minute == 10 and last_report_key != report_key:
             nightly_report(conn, tz, notifier)
+            last_report_key = report_key
 
         # Monthly review on 1st at 09:00
-        if now.day == 1 and now.hour == 9 and now.minute == 0:
+        monthly_key = f"{now.strftime('%Y-%m')}-01 09:00"
+        if now.day == 1 and now.hour == 9 and now.minute == 0 and last_monthly_key != monthly_key:
             monthly_review(conn, tz, notifier)
+            last_monthly_key = monthly_key
 
         time.sleep(30)
 
@@ -200,6 +212,34 @@ def cmd_transactions(args) -> None:
         created_at, amount, description, merchant_name, category, is_pending = row
         print(
             f"{created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pending={is_pending}"
+        )
+
+def cmd_status(args) -> None:
+    settings = load_settings()
+    conn = connect(settings.db_path)
+    cur = conn.execute("SELECT last_sync_at FROM monzo_connections WHERE id = ?", ("monzo_default",))
+    row = cur.fetchone()
+    last_sync = row[0] if row else None
+
+    cur = conn.execute(
+        "SELECT job_name, run_key, status, started_at, finished_at FROM job_runs ORDER BY started_at DESC LIMIT 5"
+    )
+    jobs = cur.fetchall()
+
+    cur = conn.execute(
+        "SELECT created_at, amount, description, merchant_name, category, is_pending FROM transactions ORDER BY created_at DESC LIMIT 5"
+    )
+    txs = cur.fetchall()
+
+    print(f"Last sync: {last_sync}")
+    print("Recent jobs:")
+    for job in jobs:
+        print(f"  {job[0]} {job[1]} {job[2]} {job[3]} {job[4]}")
+    print("Recent transactions:")
+    for tx in txs:
+        created_at, amount, description, merchant_name, category, is_pending = tx
+        print(
+            f"  {created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pending={is_pending}"
         )
 
 
@@ -250,6 +290,9 @@ def main() -> None:
     tx.add_argument("--limit", default="50")
     tx.add_argument("--days", default=None, help="Limit to last N days")
     tx.set_defaults(func=cmd_transactions)
+
+    status = sub.add_parser("status", help="Show last sync, recent jobs, recent transactions")
+    status.set_defaults(func=cmd_status)
 
     args = parser.parse_args()
 
