@@ -52,10 +52,19 @@ def sync_all(conn, token: str) -> None:
     conn.commit()
 
     account_id_for_pots = None
-    for acc in accounts.get("accounts", []):
-        if acc.get("id"):
-            account_id_for_pots = acc.get("id")
-            break
+    # Prefer configured primary account id for pots
+    try:
+        cur = conn.execute("SELECT value_json FROM rules WHERE key = ?", ("primary_account_id",))
+        row = cur.fetchone()
+        if row and row[0]:
+            account_id_for_pots = json.loads(row[0])
+    except Exception:
+        pass
+    if not account_id_for_pots:
+        for acc in accounts.get("accounts", []):
+            if acc.get("id"):
+                account_id_for_pots = acc.get("id")
+                break
 
     if account_id_for_pots:
         try:

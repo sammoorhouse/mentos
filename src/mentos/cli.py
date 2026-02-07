@@ -13,6 +13,7 @@ from .storage import ensure_user, set_rule, get_rule, list_rules, store_monzo_to
 from .sync import sync_all
 from .reports import nightly_report as generate_nightly_report
 from .sweep import run_daily_sweep
+from .monzo_client import MonzoClient
 
 logger = logging.getLogger("mentos.cli")
 
@@ -108,6 +109,18 @@ def cmd_sync(args) -> None:
     logger.info("Sync complete")
 
 
+def cmd_accounts(args) -> None:
+    settings = load_settings()
+    conn = connect(settings.db_path)
+    token = _resolve_monzo_token(settings, conn)
+    if not token:
+        raise RuntimeError("Missing Monzo token")
+    client = MonzoClient(token)
+    data = client.list_accounts()
+    for acc in data.get("accounts", []):
+        print(f"{acc.get('id')} | {acc.get('description')} | {acc.get('type')} | {acc.get('created')}")
+
+
 def cmd_report(args) -> None:
     settings = load_settings()
     conn = connect(settings.db_path)
@@ -186,10 +199,18 @@ def cmd_transactions(args) -> None:
     conn = connect(settings.db_path)
     limit = int(args.limit)
     days = int(args.days) if args.days else None
+    pot_only = bool(args.pot_only)
+    pot_lookup = {}
+    try:
+        cur_pots = conn.execute("SELECT id, name FROM pots")
+        for pot_id, pot_name in cur_pots.fetchall():
+            pot_lookup[pot_id] = pot_name
+    except Exception:
+        pass
     if days:
         cur = conn.execute(
             """
-            SELECT created_at, amount, description, merchant_name, category, is_pending
+            SELECT created_at, amount, description, merchant_name, category, is_pending, account_id
             FROM transactions
             WHERE created_at >= datetime('now', ?)
             ORDER BY created_at DESC
@@ -200,7 +221,7 @@ def cmd_transactions(args) -> None:
     else:
         cur = conn.execute(
             """
-            SELECT created_at, amount, description, merchant_name, category, is_pending
+            SELECT created_at, amount, description, merchant_name, category, is_pending, account_id
             FROM transactions
             ORDER BY created_at DESC
             LIMIT ?
@@ -209,9 +230,19 @@ def cmd_transactions(args) -> None:
         )
     rows = cur.fetchall()
     for row in rows:
-        created_at, amount, description, merchant_name, category, is_pending = row
+        created_at, amount, description, merchant_name, category, is_pending, account_id = row
+        pot_name = ""
+        is_pot = False
+        if description and description in pot_lookup:
+            pot_name = pot_lookup.get(description, "")
+            is_pot = True
+        if category in ("transfers", "savings") and description and description.startswith("pot_"):
+            is_pot = True
+            pot_name = pot_lookup.get(description, pot_name)
+        if pot_only and not is_pot:
+            continue
         print(
-            f"{created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pending={is_pending}"
+            f"{created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pot={pot_name} | account={account_id} | pending={is_pending}"
         )
 
 def cmd_status(args) -> None:
@@ -241,6 +272,16 @@ def cmd_status(args) -> None:
         print(
             f"  {created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pending={is_pending}"
         )
+
+
+def cmd_pots(args) -> None:
+    settings = load_settings()
+    conn = connect(settings.db_path)
+    cur = conn.execute("SELECT id, name, balance, currency FROM pots ORDER BY name")
+    rows = cur.fetchall()
+    for row in rows:
+        pot_id, name, balance, currency = row
+        print(f"{name} | {pot_id} | {balance} {currency}")
 
 
 def main() -> None:
@@ -276,6 +317,9 @@ def main() -> None:
     sync = sub.add_parser("sync", help="Sync Monzo data")
     sync.set_defaults(func=cmd_sync)
 
+    accounts = sub.add_parser("accounts", help="List Monzo accounts")
+    accounts.set_defaults(func=cmd_accounts)
+
     run = sub.add_parser("run", help="Run loop")
     run.set_defaults(func=cmd_run)
 
@@ -289,10 +333,14 @@ def main() -> None:
     tx = sub.add_parser("transactions", help="List recent transactions")
     tx.add_argument("--limit", default="50")
     tx.add_argument("--days", default=None, help="Limit to last N days")
+    tx.add_argument("--pot-only", action="store_true", help="Only show pot-related transfers")
     tx.set_defaults(func=cmd_transactions)
 
     status = sub.add_parser("status", help="Show last sync, recent jobs, recent transactions")
     status.set_defaults(func=cmd_status)
+
+    pots = sub.add_parser("pots", help="List pots")
+    pots.set_defaults(func=cmd_pots)
 
     args = parser.parse_args()
 
