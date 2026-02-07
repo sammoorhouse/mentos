@@ -169,6 +169,39 @@ def cmd_run(args) -> None:
 
         time.sleep(30)
 
+def cmd_transactions(args) -> None:
+    settings = load_settings()
+    conn = connect(settings.db_path)
+    limit = int(args.limit)
+    days = int(args.days) if args.days else None
+    if days:
+        cur = conn.execute(
+            """
+            SELECT created_at, amount, description, merchant_name, category, is_pending
+            FROM transactions
+            WHERE created_at >= datetime('now', ?)
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (f"-{days} day", limit),
+        )
+    else:
+        cur = conn.execute(
+            """
+            SELECT created_at, amount, description, merchant_name, category, is_pending
+            FROM transactions
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+    rows = cur.fetchall()
+    for row in rows:
+        created_at, amount, description, merchant_name, category, is_pending = row
+        print(
+            f"{created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pending={is_pending}"
+        )
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="mentos")
@@ -212,6 +245,11 @@ def main() -> None:
 
     sweep = sub.add_parser("sweep", help="Run daily sweep now")
     sweep.set_defaults(func=cmd_sweep)
+
+    tx = sub.add_parser("transactions", help="List recent transactions")
+    tx.add_argument("--limit", default="50")
+    tx.add_argument("--days", default=None, help="Limit to last N days")
+    tx.set_defaults(func=cmd_transactions)
 
     args = parser.parse_args()
 

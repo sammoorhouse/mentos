@@ -1,9 +1,8 @@
 import json
 import logging
-from datetime import datetime, timezone
-from typing import Optional
+from datetime import datetime, timezone, timedelta
 
-from .monzo_client import MonzoClient
+from .monzo_client import MonzoClient, MonzoError
 from .storage import (
     ensure_user,
     get_last_sync,
@@ -19,11 +18,20 @@ def _parse_iso(ts: str) -> str:
     return ts.replace("Z", "+00:00")
 
 
+def _parse_dt(ts: str) -> datetime:
+    return datetime.fromisoformat(_parse_iso(ts))
+
+
 def sync_all(conn, token: str) -> None:
     user_id = ensure_user(conn)
     client = MonzoClient(token)
 
-    accounts = client.list_accounts()
+    try:
+        accounts = client.list_accounts()
+    except MonzoError as exc:
+        logger.error("Monzo accounts error: %s", exc)
+        raise
+
     log_raw_event(conn, user_id, "monzo.accounts", accounts)
     for acc in accounts.get("accounts", []):
         conn.execute(
@@ -50,39 +58,60 @@ def sync_all(conn, token: str) -> None:
             break
 
     if account_id_for_pots:
-        pots = client.list_pots(account_id_for_pots)
-        log_raw_event(conn, user_id, "monzo.pots", pots)
-        for pot in pots.get("pots", []):
-            conn.execute(
-                """
-                INSERT OR REPLACE INTO pots (id, user_id, name, balance, currency, created_at, raw_json)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    pot.get("id"),
-                    user_id,
-                    pot.get("name"),
-                    pot.get("balance", 0),
-                    pot.get("currency"),
-                    _parse_iso(pot.get("created", datetime.now(timezone.utc).isoformat())),
-                    json.dumps(pot),
-                ),
-            )
-        conn.commit()
+        try:
+            pots = client.list_pots(account_id_for_pots)
+            log_raw_event(conn, user_id, "monzo.pots", pots)
+            for pot in pots.get("pots", []):
+                conn.execute(
+                    """
+                    INSERT OR REPLACE INTO pots (id, user_id, name, balance, currency, created_at, raw_json)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        pot.get("id"),
+                        user_id,
+                        pot.get("name"),
+                        pot.get("balance", 0),
+                        pot.get("currency"),
+                        _parse_iso(pot.get("created", datetime.now(timezone.utc).isoformat())),
+                        json.dumps(pot),
+                    ),
+                )
+            conn.commit()
+        except MonzoError as exc:
+            logger.error("Monzo pots error: %s", exc)
+            raise
 
     last_sync = get_last_sync(conn)
     if last_sync:
         logger.info("Syncing transactions since %s", last_sync)
     else:
-        logger.info("Syncing recent transactions")
+        # Monzo can require verification for longer history; default to last 30 days on first sync
+        last_sync = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
+        logger.info("No prior sync. Fetching last 30 days since %s", last_sync)
 
     for acc in accounts.get("accounts", []):
         account_id = acc.get("id")
         if not account_id:
             continue
         before = None
+        verification_retry = False
         while True:
-            txs = client.list_transactions(account_id, since=last_sync, before=before)
+            try:
+                txs = client.list_transactions(account_id, since=last_sync, before=before)
+            except MonzoError as exc:
+                if "verification_required" in str(exc) and not verification_retry:
+                    # Retry with a narrower window (last 7 days)
+                    last_sync = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+                    before = None
+                    verification_retry = True
+                    logger.warning(
+                        "Monzo verification required. Retrying with last 7 days since %s",
+                        last_sync,
+                    )
+                    continue
+                logger.error("Monzo transactions error: %s", exc)
+                raise
             log_raw_event(conn, user_id, "monzo.transactions", txs)
             items = txs.get("transactions", [])
             if not items:
@@ -119,6 +148,12 @@ def sync_all(conn, token: str) -> None:
             if len(items) < 100:
                 break
             before = items[-1].get("created")
+            if before and last_sync:
+                try:
+                    if _parse_dt(before) <= _parse_dt(last_sync):
+                        break
+                except Exception:
+                    pass
 
     update_last_sync(conn, datetime.now(timezone.utc).isoformat())
 

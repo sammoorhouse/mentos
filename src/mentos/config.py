@@ -3,6 +3,8 @@ import os
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
 
+from dotenv import load_dotenv
+
 
 @dataclass
 class Settings:
@@ -30,6 +32,7 @@ def _load_encryption_key() -> bytes | None:
 
 
 def load_settings() -> Settings:
+    load_dotenv()
     tz = os.getenv("MENTOS_TIMEZONE", "Europe/London")
     return Settings(
         db_path=os.getenv("MENTOS_DB_PATH", "./mentos.sqlite"),

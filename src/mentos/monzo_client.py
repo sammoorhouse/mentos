@@ -6,6 +6,13 @@ from typing import Any, Dict, Optional
 logger = logging.getLogger("mentos.monzo")
 
 
+class MonzoError(RuntimeError):
+    def __init__(self, status: int, body: str):
+        super().__init__(f"Monzo API error {status}: {body}")
+        self.status = status
+        self.body = body
+
+
 class MonzoClient:
     BASE_URL = "https://api.monzo.com"
 
@@ -37,7 +44,8 @@ class MonzoClient:
                 time.sleep(backoff)
                 backoff = min(backoff * 2, 30)
                 continue
-            resp.raise_for_status()
+            if resp.status_code >= 400:
+                raise MonzoError(resp.status_code, resp.text)
             return resp.json()
         raise RuntimeError("Monzo request failed after retries")
 
@@ -60,7 +68,14 @@ class MonzoClient:
             params.append(("since", since))
         if before:
             params.append(("before", before))
-        return self._request("GET", "/transactions", params=params)
+        try:
+            return self._request("GET", "/transactions", params=params)
+        except MonzoError as exc:
+            if exc.status == 403:
+                # Retry without expand, some tokens lack merchant expand permission
+                params = [p for p in params if p != ("expand[]", "merchant")]
+                return self._request("GET", "/transactions", params=params)
+            raise
 
     def deposit_to_pot(self, pot_id: str, account_id: str, amount: int, dedupe_id: str):
         data = {

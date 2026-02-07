@@ -1,0 +1,2 @@
+[console_scripts]
+mentos = mentos.cli:main
