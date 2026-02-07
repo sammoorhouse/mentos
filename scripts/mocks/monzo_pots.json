@@ -1,0 +1,18 @@
+{
+  "pots": [
+    {
+      "id": "pot_daily",
+      "name": "Daily Spend",
+      "balance": 5420,
+      "currency": "GBP",
+      "created": "2024-02-01T08:00:00Z"
+    },
+    {
+      "id": "pot_savings",
+      "name": "Savings",
+      "balance": 250000,
+      "currency": "GBP",
+      "created": "2024-02-01T08:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "transactions": [
+    {
+      "id": "tx_1",
+      "amount": -1299,
+      "currency": "GBP",
+      "description": "COFFEE SHOP",
+      "category": "eating_out",
+      "created": "2024-03-10T08:32:00Z",
+      "settled": "2024-03-10T08:32:05Z",
+      "merchant": {"name": "Nice Coffee"},
+      "is_load": false
+    },
+    {
+      "id": "tx_2",
+      "amount": -4500,
+      "currency": "GBP",
+      "description": "GROCERY",
+      "category": "groceries",
+      "created": "2024-03-10T18:12:00Z",
+      "settled": "2024-03-10T18:12:05Z",
+      "merchant": {"name": "Food Market"},
+      "is_load": false
+    },
+    {
+      "id": "tx_3",
+      "amount": 250000,
+      "currency": "GBP",
+      "description": "SALARY",
+      "category": "income",
+      "created": "2024-03-28T08:00:00Z",
+      "settled": "2024-03-28T08:00:02Z",
+      "merchant": {"name": "Acme Ltd"},
+      "is_load": false
+    }
+  ]
+}
