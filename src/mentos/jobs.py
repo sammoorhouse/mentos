@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 from .aggregates import rebuild_daily
 from .breakthroughs import detect_breakthroughs, seed_v1_goals, update_weekly_goal_progress
 from .chatgpt import ChatGPTClient
+from .drift import detect_goal_drift_events
 from .notifications import Notification, PushoverClient, can_send
 from .reports import (
     monthly_review as generate_monthly_review,
@@ -117,7 +118,8 @@ def weekly_breakthrough_review(
         seed_v1_goals(conn)
         update_weekly_goal_progress(conn)
         breakthroughs = detect_breakthroughs(conn, chatgpt_client=chatgpt_client)
-        if not breakthroughs or not notifier:
+        drift_events = detect_goal_drift_events(conn, chatgpt_client=chatgpt_client)
+        if not notifier:
             return
 
         if can_send(
@@ -132,6 +134,17 @@ def weekly_breakthrough_review(
                     Notification(
                         title="You’ve hit a breakthrough.",
                         message=f"{b['message']} {b['next_goal_suggestion']}",
+                    ),
+                    conn=conn,
+                )
+            for event in drift_events:
+                notifier.send(
+                    Notification(
+                        title="Quick check-in on your goal",
+                        message=(
+                            "Looks like spend has been above your target for a few weeks. "
+                            f"{event['message']}"
+                        ),
                     ),
                     conn=conn,
                 )

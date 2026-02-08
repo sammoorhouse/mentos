@@ -27,6 +27,51 @@ def _yesterday_range(tz: ZoneInfo):
     return start, end
 
 
+def _adaptive_signals(conn, selected_goals: list[str]) -> dict:
+    active_goals = conn.execute(
+        "SELECT id, name, type, baseline_value, created_at FROM goals ORDER BY created_at ASC"
+    ).fetchall()
+
+    recent_drift_events = conn.execute(
+        """
+        SELECT COUNT(1)
+        FROM goal_drift_events
+        WHERE date(triggered_at) >= date('now', '-60 day')
+        """
+    ).fetchone()[0]
+
+    breakthroughs_last_60_days = conn.execute(
+        """
+        SELECT COUNT(1)
+        FROM breakthroughs
+        WHERE date(triggered_at) >= date('now', '-60 day')
+        """
+    ).fetchone()[0]
+
+    pending_drift_events = conn.execute(
+        "SELECT COUNT(1) FROM goal_drift_events WHERE status = 'pending'"
+    ).fetchone()[0]
+
+    return {
+        "active_goals": [
+            {
+                "id": goal_id,
+                "name": name,
+                "type": goal_type,
+                "baseline_value": float(baseline_value or 0),
+                "created_at": created_at,
+            }
+            for goal_id, name, goal_type, baseline_value, created_at in active_goals
+        ],
+        "selected_goals": selected_goals,
+        "recent_drift_events": int(recent_drift_events or 0),
+        "pending_drift_events": int(pending_drift_events or 0),
+        "breakthroughs_last_60_days": int(breakthroughs_last_60_days or 0),
+        "ignored_insights": int(pending_drift_events or 0),
+        "tone_preference": get_rule(conn, "insight_tone_preference") or "supportive",
+    }
+
+
 def _build_spending_context(conn, tz: ZoneInfo) -> dict:
     now = datetime.now(tz)
     last_30_days = (now - timedelta(days=30)).isoformat()
@@ -101,7 +146,9 @@ def _personalize_insights(
     for index, pattern in enumerate(patterns, start=1):
         final_message = pattern.prompt
         if chatgpt_client:
-            generated = chatgpt_client.generate_personalized_message(pattern.prompt, spending_context)
+            generated = chatgpt_client.generate_personalized_message(
+                pattern.prompt, spending_context
+            )
             if generated:
                 final_message = generated
         personalized.append(
@@ -197,8 +244,10 @@ def monthly_review(
         summary.append("Not enough data yet for strong patterns.")
 
     selected_goals = normalize_selected_goals(get_rule(conn, "insight_goals"))
+    adaptive_signals = _adaptive_signals(conn, selected_goals)
     spending_context = _build_spending_context(conn, tz)
-    insights = _personalize_insights(chatgpt_client, spending_context, selected_goals)
+    llm_context = {**spending_context, "adaptive_signals": adaptive_signals}
+    insights = _personalize_insights(chatgpt_client, llm_context, selected_goals)
 
     payload = {
         "summary": summary,
@@ -206,6 +255,7 @@ def monthly_review(
         "goal_catalog": goal_catalog(),
         "selected_goals": selected_goals,
         "spending_context": spending_context,
+        "adaptive_signals": adaptive_signals,
         "insights": insights,
         "chatgpt_enabled": bool(chatgpt_client and chatgpt_client.is_configured()),
     }
