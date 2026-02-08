@@ -1,12 +1,42 @@
+import json
 import logging
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
-import json
 
-from .heuristics import budget_drift, category_outliers, late_night_spend_count, recurring_merchants, detect_salary
+from .chatgpt import ChatGPTClient
+from .heuristics import (
+    budget_drift,
+    category_outliers,
+    detect_salary,
+    late_night_spend_count,
+    recurring_merchants,
+)
 from .notifications import Notification, PushoverClient
 
 logger = logging.getLogger("mentos.reports")
+
+INSIGHT_PROMPTS = [
+    (
+        "Small daily luxuries add up—would homemade alternatives help you keep more "
+        "of your money this month?"
+    ),
+    "Dining out has been frequent lately—does this still align with your monthly savings target?",
+    "You seem to make impulse buys late at night—do these purchases support your health goals?",
+    "Your subscriptions are growing—are all of them still giving you enough value?",
+    "You made a big-ticket purchase recently—does it fit your long-term financial goals?",
+    "You often choose premium brands—would a few budget alternatives feel acceptable right now?",
+    (
+        "You have been consistently buying healthy groceries—great job; are you ready "
+        "to set a new nutrition target?"
+    ),
+    (
+        "Your saving pattern has been consistent—are you ready to start investing "
+        "part of that momentum?"
+    ),
+    "Convenience spending is rising—does it truly serve your priorities this month?",
+    "You are hitting your weekly step goal—would a planned reward help you stay consistent?",
+    "Food delivery is frequent—would a weekly grocery routine make your meals easier and cheaper?",
+]
 
 
 def _yesterday_range(tz: ZoneInfo):
@@ -14,6 +44,91 @@ def _yesterday_range(tz: ZoneInfo):
     start = datetime(now.year, now.month, now.day, tzinfo=tz) - timedelta(days=1)
     end = start + timedelta(days=1)
     return start, end
+
+
+def _build_spending_context(conn, tz: ZoneInfo) -> dict:
+    now = datetime.now(tz)
+    last_30_days = (now - timedelta(days=30)).isoformat()
+
+    cur = conn.execute(
+        """
+        SELECT
+            SUM(CASE WHEN amount < 0 THEN -amount ELSE 0 END),
+            SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END)
+        FROM transactions
+        WHERE created_at >= ? AND is_pending = 0
+        """,
+        (last_30_days,),
+    )
+    spend_30, income_30 = cur.fetchone()
+
+    cur = conn.execute(
+        """
+        SELECT category, SUM(CASE WHEN amount < 0 THEN -amount ELSE 0 END) AS total
+        FROM transactions
+        WHERE created_at >= ? AND is_pending = 0
+        GROUP BY category
+        ORDER BY total DESC
+        LIMIT 5
+        """,
+        (last_30_days,),
+    )
+    top_categories = [
+        {"category": category or "uncategorized", "amount": int(total or 0)}
+        for category, total in cur.fetchall()
+    ]
+
+    cur = conn.execute(
+        """
+        SELECT description, amount, created_at
+        FROM transactions
+        WHERE created_at >= ? AND amount < 0 AND is_pending = 0
+        ORDER BY ABS(amount) DESC
+        LIMIT 3
+        """,
+        (last_30_days,),
+    )
+    big_purchases = [
+        {
+            "description": description or "",
+            "amount": int(-amount),
+            "created_at": created_at,
+        }
+        for description, amount, created_at in cur.fetchall()
+    ]
+
+    return {
+        "window_days": 30,
+        "total_spend_30d": int(spend_30 or 0),
+        "total_income_30d": int(income_30 or 0),
+        "top_spend_categories": top_categories,
+        "late_night_spend_count_7d": late_night_spend_count(conn, tz=tz),
+        "budget_drift": budget_drift(conn),
+        "recurring_merchants": recurring_merchants(conn),
+        "salary_signals": detect_salary(conn),
+        "big_purchases": big_purchases,
+    }
+
+
+def _personalize_insights(
+    chatgpt_client: ChatGPTClient | None,
+    spending_context: dict,
+) -> list[dict]:
+    personalized = []
+    for index, insight in enumerate(INSIGHT_PROMPTS, start=1):
+        final_message = insight
+        if chatgpt_client:
+            generated = chatgpt_client.generate_personalized_message(insight, spending_context)
+            if generated:
+                final_message = generated
+        personalized.append(
+            {
+                "id": index,
+                "insight": insight,
+                "final_message": final_message,
+            }
+        )
+    return personalized
 
 
 def nightly_report(conn, tz: ZoneInfo, notifier: PushoverClient | None = None) -> dict:
@@ -75,26 +190,46 @@ def nightly_report(conn, tz: ZoneInfo, notifier: PushoverClient | None = None) -
     return payload
 
 
-def monthly_review(conn, tz: ZoneInfo, notifier: PushoverClient | None = None) -> dict:
+def monthly_review(
+    conn,
+    tz: ZoneInfo,
+    notifier: PushoverClient | None = None,
+    chatgpt_client: ChatGPTClient | None = None,
+) -> dict:
     salaries = detect_salary(conn)
     recurring = recurring_merchants(conn)
 
     summary = []
     if salaries:
-        summary.append(f"Possible salary: {salaries[0]['description']} (~£{salaries[0]['avg_amount']/100:.0f})")
+        salary = salaries[0]
+        summary.append(
+            f"Possible salary: {salary['description']} (~£{salary['avg_amount'] / 100:.0f})"
+        )
     if recurring:
         summary.append(f"Recurring merchants: {', '.join(recurring[:5])}")
     if not summary:
         summary.append("Not enough data yet for strong patterns.")
 
-    payload = {"summary": summary, "generated_at": datetime.now(tz).isoformat()}
+    spending_context = _build_spending_context(conn, tz)
+    insights = _personalize_insights(chatgpt_client, spending_context)
+
+    payload = {
+        "summary": summary,
+        "generated_at": datetime.now(tz).isoformat(),
+        "spending_context": spending_context,
+        "insights": insights,
+        "chatgpt_enabled": bool(chatgpt_client and chatgpt_client.is_configured()),
+    }
 
     if notifier:
-        notifier.send(Notification(title="Monthly review", message=" | ".join(summary[:2])), conn=conn)
+        top_message = insights[0]["final_message"] if insights else "No insights available"
+        notifier.send(Notification(title="Monthly review", message=top_message), conn=conn)
 
     conn.execute(
         """
-        INSERT INTO insights (id, user_id, kind, period_start, period_end, summary, detail_json, created_at)
+        INSERT INTO insights (
+            id, user_id, kind, period_start, period_end, summary, detail_json, created_at
+        )
         VALUES (hex(randomblob(16)), ?, ?, ?, ?, ?, ?, datetime('now'))
         """,
         (

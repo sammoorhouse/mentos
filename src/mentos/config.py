@@ -19,6 +19,9 @@ class Settings:
     monzo_oauth_client_id: str | None
     monzo_oauth_client_secret: str | None
     monzo_oauth_redirect_uri: str | None
+    chatgpt_api_key: str | None
+    chatgpt_model: str
+    chatgpt_base_url: str
 
 
 def _load_encryption_key() -> bytes | None:
@@ -46,4 +49,7 @@ def load_settings() -> Settings:
         monzo_oauth_client_id=os.getenv("MONZO_OAUTH_CLIENT_ID") or None,
         monzo_oauth_client_secret=os.getenv("MONZO_OAUTH_CLIENT_SECRET") or None,
         monzo_oauth_redirect_uri=os.getenv("MONZO_OAUTH_REDIRECT_URI") or None,
+        chatgpt_api_key=os.getenv("CHATGPT_API_KEY") or None,
+        chatgpt_model=os.getenv("CHATGPT_MODEL", "gpt-4o-mini"),
+        chatgpt_base_url=os.getenv("CHATGPT_BASE_URL", "https://api.openai.com/v1"),
     )

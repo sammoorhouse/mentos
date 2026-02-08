@@ -51,6 +51,19 @@ mentos config set exclude_categories '["transfers","savings"]'
 mentos config set exclude_description_keywords '["pot_","internal transfer"]'
 ```
 
+## ChatGPT insight personalization
+
+To enable ChatGPT-generated monthly insight messages, set:
+
+```bash
+export CHATGPT_API_KEY="<your-openai-key>"
+# optional
+export CHATGPT_MODEL="gpt-4o-mini"
+export CHATGPT_BASE_URL="https://api.openai.com/v1"
+```
+
+Without an API key, mentos will use built-in default insight messages.
+
 ## Commands
 
 - `mentos db init` initialize SQLite + apply migrations
