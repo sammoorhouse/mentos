@@ -65,6 +65,8 @@ def cmd_db_init(args) -> None:
         set_rule(conn, user_id, "exclude_categories", ["transfers", "savings"])
     if get_rule(conn, "exclude_description_keywords") is None:
         set_rule(conn, user_id, "exclude_description_keywords", ["pot_"])
+    if get_rule(conn, "insight_goals") is None:
+        set_rule(conn, user_id, "insight_goals", ["balanced"])
     logger.info("DB ready at %s", settings.db_path)
 
 
