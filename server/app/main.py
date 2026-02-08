@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter
@@ -6,11 +8,15 @@ from slowapi.extension import _rate_limit_exceeded_handler
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
 
-from app.api import admin, auth, devices, monzo, read
+from app.api import admin, auth, devices, health, monzo, read
 from app.core.config import get_settings
 from app.db.session import Base, engine
 
 settings = get_settings()
+logger = logging.getLogger(__name__)
+if settings.database_url:
+    logger.info("Database configuration detected.")
+
 Base.metadata.create_all(bind=engine)
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
@@ -30,8 +36,4 @@ app.include_router(devices.router)
 app.include_router(monzo.router)
 app.include_router(read.router)
 app.include_router(admin.router)
-
-
-@app.get("/health")
-def health():
-    return {"ok": True}
+app.include_router(health.router)
