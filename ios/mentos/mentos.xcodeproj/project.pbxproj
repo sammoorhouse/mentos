@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+  archiveVersion = 1;
+  classes = {
+  };
+  objectVersion = 55;
+  objects = {
+
+/* Begin PBXBuildFile section */
+    040F698C10B68302AF02A561 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4422B2B55FDE245C5DC2DB7A /* App.swift */; };
+    1B8C5E9791786BE1DBF7AB7F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A8BBB968E3C1A4376B208 /* RootView.swift */; };
+    F0279779BBF775E46EDBF6A4 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A92E6703590122B4FA95551 /* SessionStore.swift */; };
+    AFC9AFA12932A45876E96B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F80565C6CAA07479111232 /* Assets.xcassets */; };
+    DCC2525CF9D08F00256ABE13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+    4422B2B55FDE245C5DC2DB7A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+    D43A8BBB968E3C1A4376B208 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+    8A92E6703590122B4FA95551 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+    D3F80565C6CAA07479111232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+    4962839057D055453C727185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+    A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+    04CA97ABD0DF0C7637613F1C /* mentos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = mentos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+    872D15274C357B3260C92966 /* Frameworks */ = {
+      isa = PBXFrameworksBuildPhase;
+      buildActionMask = 2147483647;
+      files = (
+      );
+      runOnlyForDeploymentPostprocessing = 0;
+    };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+    9CCE2E1638057CBF63C6B466 = {
+      isa = PBXGroup;
+      children = (
+        35FD33EF26331B8C6239A8F3 /* mentos */,
+        2A8DB4351756D33C9E160CD8 /* Products */,
+      );
+      sourceTree = "<group>";
+    };
+    35FD33EF26331B8C6239A8F3 /* mentos */ = {
+      isa = PBXGroup;
+      children = (
+        4422B2B55FDE245C5DC2DB7A /* App.swift */,
+        D43A8BBB968E3C1A4376B208 /* RootView.swift */,
+        8A92E6703590122B4FA95551 /* SessionStore.swift */,
+        D3F80565C6CAA07479111232 /* Assets.xcassets */,
+        8F9EDABC149CC7A468786974 /* Preview Content */,
+        4962839057D055453C727185 /* Info.plist */,
+      );
+      path = mentos;
+      sourceTree = "<group>";
+    };
+    8F9EDABC149CC7A468786974 /* Preview Content */ = {
+      isa = PBXGroup;
+      children = (
+        A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */,
+      );
+      path = "Preview Content";
+      sourceTree = "<group>";
+    };
+    2A8DB4351756D33C9E160CD8 /* Products */ = {
+      isa = PBXGroup;
+      children = (
+        04CA97ABD0DF0C7637613F1C /* mentos.app */,
+      );
+      name = Products;
+      sourceTree = "<group>";
+    };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+    94A877DB03911CA7C9AB1392 /* mentos */ = {
+      isa = PBXNativeTarget;
+      buildConfigurationList = 6462AAB512BD0A07E6301F8B /* Build configuration list for PBXNativeTarget "mentos" */;
+      buildPhases = (
+        DAA461972B7481C5E291C66A /* Sources */,
+        872D15274C357B3260C92966 /* Frameworks */,
+        7D241FCEFB7DC68EA3036CAD /* Resources */,
+      );
+      buildRules = (
+      );
+      dependencies = (
+      );
+      name = mentos;
+      productName = mentos;
+      productReference = 04CA97ABD0DF0C7637613F1C /* mentos.app */;
+      productType = "com.apple.product-type.application";
+    };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+    8BAF50E63DE8102915B0A538 /* Project object */ = {
+      isa = PBXProject;
+      attributes = {
+        BuildIndependentTargetsInParallel = 1;
+        LastSwiftUpdateCheck = 1500;
+        LastUpgradeCheck = 1500;
+        TargetAttributes = {
+          94A877DB03911CA7C9AB1392 = {
+            CreatedOnToolsVersion = 15.0;
+          };
+        };
+      };
+      buildConfigurationList = A44725D33B1C9854CDF5FFEE /* Build configuration list for PBXProject "mentos" */;
+      compatibilityVersion = "Xcode 15.0";
+      developmentRegion = en;
+      hasScannedForEncodings = 0;
+      knownRegions = (
+        en,
+        Base,
+      );
+      mainGroup = 9CCE2E1638057CBF63C6B466;
+      productRefGroup = 2A8DB4351756D33C9E160CD8 /* Products */;
+      projectDirPath = "";
+      projectRoot = "";
+      targets = (
+        94A877DB03911CA7C9AB1392 /* mentos */,
+      );
+    };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+    7D241FCEFB7DC68EA3036CAD /* Resources */ = {
+      isa = PBXResourcesBuildPhase;
+      buildActionMask = 2147483647;
+      files = (
+        AFC9AFA12932A45876E96B2B /* Assets.xcassets in Resources */,
+        DCC2525CF9D08F00256ABE13 /* Preview Assets.xcassets in Resources */,
+      );
+      runOnlyForDeploymentPostprocessing = 0;
+    };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+    DAA461972B7481C5E291C66A /* Sources */ = {
+      isa = PBXSourcesBuildPhase;
+      buildActionMask = 2147483647;
+      files = (
+        040F698C10B68302AF02A561 /* App.swift in Sources */,
+        1B8C5E9791786BE1DBF7AB7F /* RootView.swift in Sources */,
+        F0279779BBF775E46EDBF6A4 /* SessionStore.swift in Sources */,
+      );
+      runOnlyForDeploymentPostprocessing = 0;
+    };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+    F0A06CAA74B7FC153179E127 /* Debug */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ALWAYS_SEARCH_USER_PATHS = NO;
+        CLANG_ANALYZER_NONNULL = YES;
+        CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+        CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+        CLANG_CXX_LIBRARY = "libc++";
+        CLANG_ENABLE_MODULES = YES;
+        CLANG_ENABLE_OBJC_ARC = YES;
+        CLANG_ENABLE_OBJC_WEAK = YES;
+        CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+        CLANG_WARN_BOOL_CONVERSION = YES;
+        CLANG_WARN_COMMA = YES;
+        CLANG_WARN_CONSTANT_CONVERSION = YES;
+        CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+        CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+        CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+        CLANG_WARN_EMPTY_BODY = YES;
+        CLANG_WARN_ENUM_CONVERSION = YES;
+        CLANG_WARN_INFINITE_RECURSION = YES;
+        CLANG_WARN_INT_CONVERSION = YES;
+        CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+        CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+        CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+        CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+        CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+        CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+        CLANG_WARN_STRICT_PROTOTYPES = YES;
+        CLANG_WARN_SUSPICIOUS_MOVE = YES;
+        CLANG_WARN_UNREACHABLE_CODE = YES;
+        CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+        DEBUG_INFORMATION_FORMAT = "dwarf";
+        ENABLE_STRICT_OBJC_MSGSEND = YES;
+        GCC_C_LANGUAGE_STANDARD = "gnu11";
+        GCC_DYNAMIC_NO_PIC = NO;
+        GCC_NO_COMMON_BLOCKS = YES;
+        GCC_OPTIMIZATION_LEVEL = 0;
+        GCC_PREPROCESSOR_DEFINITIONS = (
+          "DEBUG=1",
+          "$(inherited)",
+        );
+        GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+        GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+        GCC_WARN_UNDECLARED_SELECTOR = YES;
+        GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+        GCC_WARN_UNUSED_FUNCTION = YES;
+        GCC_WARN_UNUSED_VARIABLE = YES;
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        MTL_ENABLE_DEBUG_INFO = YES;
+        ONLY_ACTIVE_ARCH = YES;
+        SDKROOT = iphoneos;
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+        SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+      };
+      name = Debug;
+    };
+    24B436F9F5DA04390B6CF26B /* Release */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ALWAYS_SEARCH_USER_PATHS = NO;
+        CLANG_ANALYZER_NONNULL = YES;
+        CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+        CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+        CLANG_CXX_LIBRARY = "libc++";
+        CLANG_ENABLE_MODULES = YES;
+        CLANG_ENABLE_OBJC_ARC = YES;
+        CLANG_ENABLE_OBJC_WEAK = YES;
+        CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+        CLANG_WARN_BOOL_CONVERSION = YES;
+        CLANG_WARN_COMMA = YES;
+        CLANG_WARN_CONSTANT_CONVERSION = YES;
+        CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+        CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+        CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+        CLANG_WARN_EMPTY_BODY = YES;
+        CLANG_WARN_ENUM_CONVERSION = YES;
+        CLANG_WARN_INFINITE_RECURSION = YES;
+        CLANG_WARN_INT_CONVERSION = YES;
+        CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+        CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+        CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+        CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+        CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+        CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+        CLANG_WARN_STRICT_PROTOTYPES = YES;
+        CLANG_WARN_SUSPICIOUS_MOVE = YES;
+        CLANG_WARN_UNREACHABLE_CODE = YES;
+        CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+        DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+        ENABLE_NS_ASSERTIONS = NO;
+        ENABLE_STRICT_OBJC_MSGSEND = YES;
+        GCC_C_LANGUAGE_STANDARD = "gnu11";
+        GCC_NO_COMMON_BLOCKS = YES;
+        GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+        GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+        GCC_WARN_UNDECLARED_SELECTOR = YES;
+        GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+        GCC_WARN_UNUSED_FUNCTION = YES;
+        GCC_WARN_UNUSED_VARIABLE = YES;
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        MTL_ENABLE_DEBUG_INFO = NO;
+        SDKROOT = iphoneos;
+        SWIFT_COMPILATION_MODE = wholemodule;
+        SWIFT_OPTIMIZATION_LEVEL = "-O";
+        VALIDATE_PRODUCT = YES;
+      };
+      name = Release;
+    };
+    ABD1A0C5F9FCDCA6A7091342 /* Debug */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        CODE_SIGN_STYLE = Automatic;
+        CURRENT_PROJECT_VERSION = 1;
+        DEVELOPMENT_ASSET_PATHS = "mentos/Preview Content";
+        INFOPLIST_FILE = mentos/Info.plist;
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        MARKETING_VERSION = 1.0;
+        PRODUCT_BUNDLE_IDENTIFIER = com.sammoorhouse.mentos.dev;
+        PRODUCT_NAME = mentos;
+        SWIFT_VERSION = 5.0;
+        TARGETED_DEVICE_FAMILY = "1,2";
+      };
+      name = Debug;
+    };
+    554C6786FB4288D56AA6441B /* Release */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        CODE_SIGN_STYLE = Automatic;
+        CURRENT_PROJECT_VERSION = 1;
+        DEVELOPMENT_ASSET_PATHS = "mentos/Preview Content";
+        INFOPLIST_FILE = mentos/Info.plist;
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        MARKETING_VERSION = 1.0;
+        PRODUCT_BUNDLE_IDENTIFIER = com.sammoorhouse.mentos.dev;
+        PRODUCT_NAME = mentos;
+        SWIFT_VERSION = 5.0;
+        TARGETED_DEVICE_FAMILY = "1,2";
+      };
+      name = Release;
+    };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+    A44725D33B1C9854CDF5FFEE /* Build configuration list for PBXProject "mentos" */ = {
+      isa = XCConfigurationList;
+      buildConfigurations = (
+        F0A06CAA74B7FC153179E127 /* Debug */,
+        24B436F9F5DA04390B6CF26B /* Release */,
+      );
+      defaultConfigurationIsVisible = 0;
+      defaultConfigurationName = Debug;
+    };
+    6462AAB512BD0A07E6301F8B /* Build configuration list for PBXNativeTarget "mentos" */ = {
+      isa = XCConfigurationList;
+      buildConfigurations = (
+        ABD1A0C5F9FCDCA6A7091342 /* Debug */,
+        554C6786FB4288D56AA6441B /* Release */,
+      );
+      defaultConfigurationIsVisible = 0;
+      defaultConfigurationName = Debug;
+    };
+/* End XCConfigurationList section */
+  };
+  rootObject = 8BAF50E63DE8102915B0A538 /* Project object */;
+}
