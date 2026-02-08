@@ -8,6 +8,7 @@ from datetime import datetime
 from rich.console import Console
 from rich.table import Table
 
+from .chatgpt import ChatGPTClient
 from .config import load_settings
 from .db import apply_migrations, connect
 from .jobs import daily_sweep, monthly_review, nightly_report, poll_and_aggregate
@@ -198,6 +199,11 @@ def cmd_run(args) -> None:
         settings.pushover_user_key,
         settings.pushover_device,
     )
+    chatgpt_client = ChatGPTClient(
+        settings.chatgpt_api_key,
+        model=settings.chatgpt_model,
+        base_url=settings.chatgpt_base_url,
+    )
     token = _resolve_monzo_token(settings, conn)
     try:
         poll_minutes = int(get_rule(conn, "poll_interval_minutes") or 5)
@@ -232,7 +238,7 @@ def cmd_run(args) -> None:
         # Monthly review on 1st at 09:00
         monthly_key = f"{now.strftime('%Y-%m')}-01 09:00"
         if now.day == 1 and now.hour == 9 and now.minute == 0 and last_monthly_key != monthly_key:
-            monthly_review(conn, tz, notifier)
+            monthly_review(conn, tz, notifier, chatgpt_client=chatgpt_client)
             last_monthly_key = monthly_key
 
         time.sleep(30)
