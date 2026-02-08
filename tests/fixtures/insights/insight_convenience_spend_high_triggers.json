@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z"
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [
+      {
+        "id": "tx_cv1",
+        "created": "2026-02-07T13:00:00Z",
+        "amount": -1500,
+        "currency": "GBP",
+        "description": "Uber",
+        "merchant": {
+          "name": "Uber",
+          "online": false
+        },
+        "category": "general",
+        "is_load": false,
+        "settled": "2026-02-07T13:00:00Z"
+      },
+      {
+        "id": "tx_cv2",
+        "created": "2026-02-07T13:00:00Z",
+        "amount": -2200,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "general",
+        "is_load": false,
+        "settled": "2026-02-07T13:00:00Z"
+      },
+      {
+        "id": "tx_cv3",
+        "created": "2026-02-06T13:00:00Z",
+        "amount": -1800,
+        "currency": "GBP",
+        "description": "Getir",
+        "merchant": {
+          "name": "Getir",
+          "online": false
+        },
+        "category": "general",
+        "is_load": false,
+        "settled": "2026-02-06T13:00:00Z"
+      },
+      {
+        "id": "tx_cv4",
+        "created": "2026-02-05T13:00:00Z",
+        "amount": -1900,
+        "currency": "GBP",
+        "description": "Gorillas",
+        "merchant": {
+          "name": "Gorillas",
+          "online": false
+        },
+        "category": "general",
+        "is_load": false,
+        "settled": "2026-02-05T13:00:00Z"
+      },
+      {
+        "id": "tx_cv5",
+        "created": "2026-02-04T13:00:00Z",
+        "amount": -2100,
+        "currency": "GBP",
+        "description": "Uber",
+        "merchant": {
+          "name": "Uber",
+          "online": false
+        },
+        "category": "general",
+        "is_load": false,
+        "settled": "2026-02-04T13:00:00Z"
+      }
+    ],
+    "pots": [],
+    "pot_transfers": []
+  }
+}

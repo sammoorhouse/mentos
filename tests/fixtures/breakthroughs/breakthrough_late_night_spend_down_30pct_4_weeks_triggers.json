@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z"
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [
+      {
+        "id": "tx_lnb1",
+        "created": "2025-12-19T23:00:00Z",
+        "amount": -10000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2025-12-19T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb2",
+        "created": "2025-12-26T23:00:00Z",
+        "amount": -10000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2025-12-26T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb3",
+        "created": "2026-01-02T23:00:00Z",
+        "amount": -10000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2026-01-02T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb4",
+        "created": "2026-01-09T23:00:00Z",
+        "amount": -10000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2026-01-09T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb5",
+        "created": "2026-01-16T23:00:00Z",
+        "amount": -6000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2026-01-16T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb6",
+        "created": "2026-01-23T23:00:00Z",
+        "amount": -7000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2026-01-23T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb7",
+        "created": "2026-01-30T23:00:00Z",
+        "amount": -6500,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2026-01-30T23:00:00Z"
+      },
+      {
+        "id": "tx_lnb8",
+        "created": "2026-02-06T23:00:00Z",
+        "amount": -7000,
+        "currency": "GBP",
+        "description": "Late Bar",
+        "merchant": {
+          "name": "Late Bar",
+          "online": false
+        },
+        "category": "entertainment",
+        "is_load": false,
+        "settled": "2026-02-06T23:00:00Z"
+      }
+    ],
+    "pots": [],
+    "pot_transfers": []
+  }
+}

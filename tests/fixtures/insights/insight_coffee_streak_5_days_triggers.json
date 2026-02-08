@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z"
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [
+      {
+        "id": "tx_c6",
+        "created": "2026-02-02T09:00:00Z",
+        "amount": -500,
+        "currency": "GBP",
+        "description": "Starbucks",
+        "merchant": {
+          "name": "Starbucks",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-02T09:00:00Z"
+      },
+      {
+        "id": "tx_c5",
+        "created": "2026-02-03T09:00:00Z",
+        "amount": -500,
+        "currency": "GBP",
+        "description": "Starbucks",
+        "merchant": {
+          "name": "Starbucks",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-03T09:00:00Z"
+      },
+      {
+        "id": "tx_c4",
+        "created": "2026-02-04T09:00:00Z",
+        "amount": -500,
+        "currency": "GBP",
+        "description": "Starbucks",
+        "merchant": {
+          "name": "Starbucks",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-04T09:00:00Z"
+      },
+      {
+        "id": "tx_c3",
+        "created": "2026-02-05T09:00:00Z",
+        "amount": -500,
+        "currency": "GBP",
+        "description": "Starbucks",
+        "merchant": {
+          "name": "Starbucks",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-05T09:00:00Z"
+      },
+      {
+        "id": "tx_c2",
+        "created": "2026-02-06T09:00:00Z",
+        "amount": -500,
+        "currency": "GBP",
+        "description": "Starbucks",
+        "merchant": {
+          "name": "Starbucks",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-06T09:00:00Z"
+      }
+    ],
+    "pots": [],
+    "pot_transfers": []
+  }
+}

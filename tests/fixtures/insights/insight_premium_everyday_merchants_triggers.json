@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z"
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [
+      {
+        "id": "tx_p1",
+        "created": "2026-02-07T12:00:00Z",
+        "amount": -1200,
+        "currency": "GBP",
+        "description": "GAILS",
+        "merchant": {
+          "name": "GAILS",
+          "online": false
+        },
+        "category": "groceries",
+        "is_load": false,
+        "settled": "2026-02-07T12:00:00Z"
+      },
+      {
+        "id": "tx_p2",
+        "created": "2026-02-06T12:00:00Z",
+        "amount": -3000,
+        "currency": "GBP",
+        "description": "Waitrose",
+        "merchant": {
+          "name": "Waitrose",
+          "online": false
+        },
+        "category": "groceries",
+        "is_load": false,
+        "settled": "2026-02-06T12:00:00Z"
+      },
+      {
+        "id": "tx_p4",
+        "created": "2026-02-04T12:00:00Z",
+        "amount": -900,
+        "currency": "GBP",
+        "description": "Pret",
+        "merchant": {
+          "name": "Pret",
+          "online": false
+        },
+        "category": "groceries",
+        "is_load": false,
+        "settled": "2026-02-04T12:00:00Z"
+      },
+      {
+        "id": "tx_p5",
+        "created": "2026-02-03T12:00:00Z",
+        "amount": -800,
+        "currency": "GBP",
+        "description": "GAILS",
+        "merchant": {
+          "name": "GAILS",
+          "online": false
+        },
+        "category": "groceries",
+        "is_load": false,
+        "settled": "2026-02-03T12:00:00Z"
+      },
+      {
+        "id": "tx_food",
+        "created": "2026-02-05T12:00:00Z",
+        "amount": -1000,
+        "currency": "GBP",
+        "description": "Tesco",
+        "merchant": {
+          "name": "Tesco",
+          "online": false
+        },
+        "category": "groceries",
+        "is_load": false,
+        "settled": "2026-02-05T12:00:00Z"
+      }
+    ],
+    "pots": [],
+    "pot_transfers": []
+  }
+}
