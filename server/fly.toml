@@ -1,0 +1,35 @@
+app = "mentos"
+primary_region = "lhr"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+
+[deploy]
+  release_command = "alembic -c alembic.ini upgrade head"
+
+[processes]
+  web = "./start-web.sh"
+  worker = "./start-worker.sh"
+
+[[services]]
+  processes = ["web"]
+  protocol = "tcp"
+  internal_port = 8080
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.http_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "10s"
+    method = "GET"
+    path = "/health"
