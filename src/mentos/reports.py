@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from .chatgpt import ChatGPTClient
+from .goals import goal_catalog, insight_patterns_for_goals, normalize_selected_goals
 from .heuristics import (
     budget_drift,
     category_outliers,
@@ -12,31 +13,11 @@ from .heuristics import (
     recurring_merchants,
 )
 from .notifications import Notification, PushoverClient
+from .storage import get_rule
 
 logger = logging.getLogger("mentos.reports")
 
-INSIGHT_PROMPTS = [
-    (
-        "Small daily luxuries add up—would homemade alternatives help you keep more "
-        "of your money this month?"
-    ),
-    "Dining out has been frequent lately—does this still align with your monthly savings target?",
-    "You seem to make impulse buys late at night—do these purchases support your health goals?",
-    "Your subscriptions are growing—are all of them still giving you enough value?",
-    "You made a big-ticket purchase recently—does it fit your long-term financial goals?",
-    "You often choose premium brands—would a few budget alternatives feel acceptable right now?",
-    (
-        "You have been consistently buying healthy groceries—great job; are you ready "
-        "to set a new nutrition target?"
-    ),
-    (
-        "Your saving pattern has been consistent—are you ready to start investing "
-        "part of that momentum?"
-    ),
-    "Convenience spending is rising—does it truly serve your priorities this month?",
-    "You are hitting your weekly step goal—would a planned reward help you stay consistent?",
-    "Food delivery is frequent—would a weekly grocery routine make your meals easier and cheaper?",
-]
+
 
 
 def _yesterday_range(tz: ZoneInfo):
@@ -113,18 +94,23 @@ def _build_spending_context(conn, tz: ZoneInfo) -> dict:
 def _personalize_insights(
     chatgpt_client: ChatGPTClient | None,
     spending_context: dict,
+    selected_goals: list[str] | None,
 ) -> list[dict]:
+    patterns = insight_patterns_for_goals(selected_goals)
     personalized = []
-    for index, insight in enumerate(INSIGHT_PROMPTS, start=1):
-        final_message = insight
+    for index, pattern in enumerate(patterns, start=1):
+        final_message = pattern.prompt
         if chatgpt_client:
-            generated = chatgpt_client.generate_personalized_message(insight, spending_context)
+            generated = chatgpt_client.generate_personalized_message(pattern.prompt, spending_context)
             if generated:
                 final_message = generated
         personalized.append(
             {
                 "id": index,
-                "insight": insight,
+                "insight_id": pattern.id,
+                "insight": pattern.prompt,
+                "goals": list(pattern.goals),
+                "tags": list(pattern.tags),
                 "final_message": final_message,
             }
         )
@@ -210,12 +196,15 @@ def monthly_review(
     if not summary:
         summary.append("Not enough data yet for strong patterns.")
 
+    selected_goals = normalize_selected_goals(get_rule(conn, "insight_goals"))
     spending_context = _build_spending_context(conn, tz)
-    insights = _personalize_insights(chatgpt_client, spending_context)
+    insights = _personalize_insights(chatgpt_client, spending_context, selected_goals)
 
     payload = {
         "summary": summary,
         "generated_at": datetime.now(tz).isoformat(),
+        "goal_catalog": goal_catalog(),
+        "selected_goals": selected_goals,
         "spending_context": spending_context,
         "insights": insights,
         "chatgpt_enabled": bool(chatgpt_client and chatgpt_client.is_configured()),
