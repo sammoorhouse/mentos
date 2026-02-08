@@ -13,6 +13,7 @@ src/mentos/logging.py
 src/mentos/monzo_client.py
 src/mentos/notifications.py
 src/mentos/reports.py
+src/mentos/spend_filters.py
 src/mentos/storage.py
 src/mentos/sweep.py
 src/mentos/sync.py
