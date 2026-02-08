@@ -11,7 +11,13 @@ from rich.table import Table
 from .chatgpt import ChatGPTClient
 from .config import load_settings
 from .db import apply_migrations, connect
-from .jobs import daily_sweep, monthly_review, nightly_report, poll_and_aggregate
+from .jobs import (
+    daily_sweep,
+    monthly_review,
+    nightly_report,
+    poll_and_aggregate,
+    weekly_breakthrough_review,
+)
 from .logging import setup_logging
 from .monzo_client import MonzoClient
 from .notifications import Notification, PushoverClient
@@ -217,6 +223,7 @@ def cmd_run(args) -> None:
     last_sweep_key = None
     last_report_key = None
     last_monthly_key = None
+    last_breakthrough_key = None
     while True:
         now = datetime.now(tz)
 
@@ -236,6 +243,17 @@ def cmd_run(args) -> None:
         if now.hour == 0 and now.minute == 10 and last_report_key != report_key:
             nightly_report(conn, tz, notifier)
             last_report_key = report_key
+
+        # Weekly breakthrough review on Monday at 09:05
+        breakthrough_key = f"{now.strftime('%G-W%V')} 09:05"
+        if (
+            now.weekday() == 0
+            and now.hour == 9
+            and now.minute == 5
+            and last_breakthrough_key != breakthrough_key
+        ):
+            weekly_breakthrough_review(conn, tz, notifier, chatgpt_client=chatgpt_client)
+            last_breakthrough_key = breakthrough_key
 
         # Monthly review on 1st at 09:00
         monthly_key = f"{now.strftime('%Y-%m')}-01 09:00"
@@ -385,6 +403,27 @@ def cmd_pots(args) -> None:
     _print_table("Pots", ["Name", "ID", "Balance", "Currency"], table_rows)
 
 
+def cmd_breakthroughs(args) -> None:
+    settings = load_settings()
+    conn = connect(settings.db_path)
+    notifier = (
+        PushoverClient(
+            settings.pushover_app_token,
+            settings.pushover_user_key,
+            settings.pushover_device,
+        )
+        if args.notify
+        else None
+    )
+    chatgpt_client = ChatGPTClient(
+        settings.chatgpt_api_key,
+        model=settings.chatgpt_model,
+        base_url=settings.chatgpt_base_url,
+    )
+    weekly_breakthrough_review(conn, settings.timezone, notifier, chatgpt_client=chatgpt_client)
+    logger.info("Breakthrough review complete")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="mentos")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -427,6 +466,10 @@ def main() -> None:
     report = sub.add_parser("report", help="Run nightly report now")
     report.add_argument("--notify", action="store_true")
     report.set_defaults(func=cmd_report)
+
+    breakthroughs = sub.add_parser("breakthroughs", help="Run weekly breakthrough detection now")
+    breakthroughs.add_argument("--notify", action="store_true")
+    breakthroughs.set_defaults(func=cmd_breakthroughs)
 
     sweep = sub.add_parser("sweep", help="Run daily sweep now")
     sweep.set_defaults(func=cmd_sweep)
