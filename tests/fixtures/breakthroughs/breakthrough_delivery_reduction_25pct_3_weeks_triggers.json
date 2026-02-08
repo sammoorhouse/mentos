@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z"
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [
+      {
+        "id": "tx_bd1",
+        "created": "2025-12-20T19:00:00Z",
+        "amount": -12000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2025-12-20T19:00:00Z"
+      },
+      {
+        "id": "tx_bd2",
+        "created": "2025-12-27T19:00:00Z",
+        "amount": -12000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2025-12-27T19:00:00Z"
+      },
+      {
+        "id": "tx_bd3",
+        "created": "2026-01-03T19:00:00Z",
+        "amount": -12000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-01-03T19:00:00Z"
+      },
+      {
+        "id": "tx_bd4",
+        "created": "2026-01-10T19:00:00Z",
+        "amount": -12000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-01-10T19:00:00Z"
+      },
+      {
+        "id": "tx_bd5",
+        "created": "2026-01-17T19:00:00Z",
+        "amount": -8000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-01-17T19:00:00Z"
+      },
+      {
+        "id": "tx_bd6",
+        "created": "2026-01-24T19:00:00Z",
+        "amount": -8000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-01-24T19:00:00Z"
+      },
+      {
+        "id": "tx_bd7",
+        "created": "2026-01-31T19:00:00Z",
+        "amount": -9000,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-01-31T19:00:00Z"
+      },
+      {
+        "id": "tx_bd8",
+        "created": "2026-02-07T19:00:00Z",
+        "amount": -9500,
+        "currency": "GBP",
+        "description": "Deliveroo",
+        "merchant": {
+          "name": "Deliveroo",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-07T19:00:00Z"
+      }
+    ],
+    "pots": [],
+    "pot_transfers": []
+  }
+}

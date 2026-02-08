@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z",
+    "baselines": {
+      "dining_out_weekly_gbp": 50
+    }
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [
+      {
+        "id": "tx_d1",
+        "created": "2026-02-07T19:00:00Z",
+        "amount": -2000,
+        "currency": "GBP",
+        "description": "Local Restaurant",
+        "merchant": {
+          "name": "Pasta House",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-07T19:00:00Z"
+      },
+      {
+        "id": "tx_d2",
+        "created": "2026-02-06T19:00:00Z",
+        "amount": -2000,
+        "currency": "GBP",
+        "description": "Local Restaurant",
+        "merchant": {
+          "name": "Pasta House",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-06T19:00:00Z"
+      },
+      {
+        "id": "tx_d3",
+        "created": "2026-02-05T19:00:00Z",
+        "amount": -2000,
+        "currency": "GBP",
+        "description": "Local Restaurant",
+        "merchant": {
+          "name": "Pasta House",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-05T19:00:00Z"
+      },
+      {
+        "id": "tx_d5",
+        "created": "2026-02-03T19:00:00Z",
+        "amount": -2000,
+        "currency": "GBP",
+        "description": "Local Restaurant",
+        "merchant": {
+          "name": "Pasta House",
+          "online": false
+        },
+        "category": "eating_out",
+        "is_load": false,
+        "settled": "2026-02-03T19:00:00Z"
+      }
+    ],
+    "pots": [],
+    "pot_transfers": []
+  }
+}

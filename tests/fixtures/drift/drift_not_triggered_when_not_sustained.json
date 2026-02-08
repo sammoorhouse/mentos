@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z",
+    "red_weeks_last_4": 1
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [],
+    "pots": [],
+    "pot_transfers": []
+  }
+}

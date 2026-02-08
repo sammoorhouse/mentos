@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-02-08T12:00:00Z"
+  },
+  "goal": {
+    "id": "goal_save_money",
+    "name": "Save more money",
+    "type": "saving",
+    "active": true
+  },
+  "monzo": {
+    "transactions": [],
+    "pots": [],
+    "pot_transfers": [
+      {
+        "id": "pt1",
+        "created": "2026-02-03T12:00:00Z",
+        "amount": 3000,
+        "currency": "GBP",
+        "direction": "into_pot",
+        "pot_id": "pot_savings"
+      },
+      {
+        "id": "pt2",
+        "created": "2026-01-27T12:00:00Z",
+        "amount": 3000,
+        "currency": "GBP",
+        "direction": "into_pot",
+        "pot_id": "pot_savings"
+      },
+      {
+        "id": "pt3",
+        "created": "2026-01-20T12:00:00Z",
+        "amount": 3000,
+        "currency": "GBP",
+        "direction": "into_pot",
+        "pot_id": "pot_savings"
+      },
+      {
+        "id": "pt4",
+        "created": "2026-01-13T12:00:00Z",
+        "amount": 3000,
+        "currency": "GBP",
+        "direction": "into_pot",
+        "pot_id": "pot_savings"
+      }
+    ]
+  }
+}
