@@ -1,21 +1,42 @@
 import argparse
+import json
 import logging
 import os
 import time
 from datetime import datetime
 
+from rich.console import Console
+from rich.table import Table
+
 from .config import load_settings
-from .logging import setup_logging
 from .db import apply_migrations, connect
-from .notifications import Notification, PushoverClient
-from .jobs import nightly_report, daily_sweep, monthly_review, poll_and_aggregate
-from .storage import ensure_user, set_rule, get_rule, list_rules, store_monzo_token, load_monzo_token
-from .sync import sync_all
-from .reports import nightly_report as generate_nightly_report
-from .sweep import run_daily_sweep
+from .jobs import daily_sweep, monthly_review, nightly_report, poll_and_aggregate
+from .logging import setup_logging
 from .monzo_client import MonzoClient
+from .notifications import Notification, PushoverClient
+from .reports import nightly_report as generate_nightly_report
+from .storage import (
+    ensure_user,
+    get_rule,
+    list_rules,
+    load_monzo_token,
+    set_rule,
+    store_monzo_token,
+)
+from .sweep import run_daily_sweep
+from .sync import sync_all
 
 logger = logging.getLogger("mentos.cli")
+console = Console()
+
+
+def _print_table(title: str, columns: list[str], rows: list[list[str]]) -> None:
+    table = Table(title=title)
+    for column in columns:
+        table.add_column(column)
+    for row in rows:
+        table.add_row(*row)
+    console.print(table)
 
 
 def cmd_db_init(args) -> None:
@@ -25,7 +46,12 @@ def cmd_db_init(args) -> None:
     conn = connect(settings.db_path)
     user_id = ensure_user(conn)
     if get_rule(conn, "poll_interval_minutes") is None:
-        set_rule(conn, user_id, "poll_interval_minutes", int(os.getenv("MENTOS_POLL_INTERVAL_MINUTES", "5")))
+        set_rule(
+            conn,
+            user_id,
+            "poll_interval_minutes",
+            int(os.getenv("MENTOS_POLL_INTERVAL_MINUTES", "5")),
+        )
     if get_rule(conn, "max_notifications_per_day") is None:
         set_rule(conn, user_id, "max_notifications_per_day", 6)
     if get_rule(conn, "quiet_hours_start") is None:
@@ -34,6 +60,10 @@ def cmd_db_init(args) -> None:
         set_rule(conn, user_id, "quiet_hours_end", "07:00")
     if get_rule(conn, "sweep_enabled") is None:
         set_rule(conn, user_id, "sweep_enabled", False)
+    if get_rule(conn, "exclude_categories") is None:
+        set_rule(conn, user_id, "exclude_categories", ["transfers", "savings"])
+    if get_rule(conn, "exclude_description_keywords") is None:
+        set_rule(conn, user_id, "exclude_description_keywords", ["pot_"])
     logger.info("DB ready at %s", settings.db_path)
 
 
@@ -65,15 +95,19 @@ def cmd_config_get(args) -> None:
     settings = load_settings()
     conn = connect(settings.db_path)
     value = get_rule(conn, args.key)
-    print(value)
+    _print_table(
+        "Config Value",
+        ["Key", "Value"],
+        [[args.key, json.dumps(value)]],
+    )
 
 
 def cmd_config_list(args) -> None:
     settings = load_settings()
     conn = connect(settings.db_path)
     rules = list_rules(conn)
-    for k, v in rules.items():
-        print(f"{k}={v}")
+    rows = [[k, json.dumps(v)] for k, v in sorted(rules.items())]
+    _print_table("Config", ["Key", "Value"], rows)
 
 
 def cmd_token_set(args) -> None:
@@ -117,8 +151,17 @@ def cmd_accounts(args) -> None:
         raise RuntimeError("Missing Monzo token")
     client = MonzoClient(token)
     data = client.list_accounts()
+    rows = []
     for acc in data.get("accounts", []):
-        print(f"{acc.get('id')} | {acc.get('description')} | {acc.get('type')} | {acc.get('created')}")
+        rows.append(
+            [
+                str(acc.get("id") or ""),
+                str(acc.get("description") or ""),
+                str(acc.get("type") or ""),
+                str(acc.get("created") or ""),
+            ]
+        )
+    _print_table("Monzo Accounts", ["ID", "Description", "Type", "Created"], rows)
 
 
 def cmd_report(args) -> None:
@@ -229,6 +272,7 @@ def cmd_transactions(args) -> None:
             (limit,),
         )
     rows = cur.fetchall()
+    table_rows = []
     for row in rows:
         created_at, amount, description, merchant_name, category, is_pending, account_id = row
         pot_name = ""
@@ -241,37 +285,84 @@ def cmd_transactions(args) -> None:
             pot_name = pot_lookup.get(description, pot_name)
         if pot_only and not is_pot:
             continue
-        print(
-            f"{created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pot={pot_name} | account={account_id} | pending={is_pending}"
+        table_rows.append(
+            [
+                str(created_at or ""),
+                str(amount or 0),
+                str(description or ""),
+                str(merchant_name or ""),
+                str(category or ""),
+                str(pot_name or ""),
+                str(account_id or ""),
+                str(is_pending),
+            ]
         )
+
+    _print_table(
+        "Transactions",
+        [
+            "Created At",
+            "Amount",
+            "Description",
+            "Merchant",
+            "Category",
+            "Pot",
+            "Account",
+            "Pending",
+        ],
+        table_rows,
+    )
 
 def cmd_status(args) -> None:
     settings = load_settings()
     conn = connect(settings.db_path)
-    cur = conn.execute("SELECT last_sync_at FROM monzo_connections WHERE id = ?", ("monzo_default",))
+    cur = conn.execute(
+        "SELECT last_sync_at FROM monzo_connections WHERE id = ?",
+        ("monzo_default",),
+    )
     row = cur.fetchone()
     last_sync = row[0] if row else None
 
+    _print_table("Status", ["Key", "Value"], [["Last sync", str(last_sync or "never")]])
+
     cur = conn.execute(
-        "SELECT job_name, run_key, status, started_at, finished_at FROM job_runs ORDER BY started_at DESC LIMIT 5"
+        "SELECT job_name, run_key, status, started_at, finished_at "
+        "FROM job_runs ORDER BY started_at DESC LIMIT 5"
     )
     jobs = cur.fetchall()
+    job_rows = [
+        [
+            str(job[0] or ""),
+            str(job[1] or ""),
+            str(job[2] or ""),
+            str(job[3] or ""),
+            str(job[4] or ""),
+        ]
+        for job in jobs
+    ]
+    _print_table("Recent Jobs", ["Job", "Run Key", "Status", "Started", "Finished"], job_rows)
 
     cur = conn.execute(
-        "SELECT created_at, amount, description, merchant_name, category, is_pending FROM transactions ORDER BY created_at DESC LIMIT 5"
+        "SELECT created_at, amount, description, merchant_name, category, is_pending "
+        "FROM transactions ORDER BY created_at DESC LIMIT 5"
     )
     txs = cur.fetchall()
-
-    print(f"Last sync: {last_sync}")
-    print("Recent jobs:")
-    for job in jobs:
-        print(f"  {job[0]} {job[1]} {job[2]} {job[3]} {job[4]}")
-    print("Recent transactions:")
-    for tx in txs:
-        created_at, amount, description, merchant_name, category, is_pending = tx
-        print(
-            f"  {created_at} | {amount} | {description} | {merchant_name or ''} | {category or ''} | pending={is_pending}"
-        )
+    tx_rows = [
+        [
+            str(tx[0] or ""),
+            str(tx[1] or 0),
+            str(tx[2] or ""),
+            str(tx[3] or ""),
+            str(tx[4] or ""),
+            str(tx[5]),
+        ]
+        for tx in txs
+    ]
+    _print_table(
+        "Recent Transactions",
+        ["Created At", "Amount", "Description", "Merchant", "Category", "Pending"],
+        tx_rows,
+    )
 
 
 def cmd_pots(args) -> None:
@@ -279,9 +370,11 @@ def cmd_pots(args) -> None:
     conn = connect(settings.db_path)
     cur = conn.execute("SELECT id, name, balance, currency FROM pots ORDER BY name")
     rows = cur.fetchall()
-    for row in rows:
-        pot_id, name, balance, currency = row
-        print(f"{name} | {pot_id} | {balance} {currency}")
+    table_rows = [
+        [str(name or ""), str(pot_id or ""), str(balance or 0), str(currency or "")]
+        for pot_id, name, balance, currency in rows
+    ]
+    _print_table("Pots", ["Name", "ID", "Balance", "Currency"], table_rows)
 
 
 def main() -> None:
