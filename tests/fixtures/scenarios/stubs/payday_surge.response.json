@@ -1,0 +1,29 @@
+{
+  "matches": [
+    {
+      "insight_id": "payday_surge",
+      "message": "Mock message for payday_surge",
+      "evidence": {
+        "windows.last_90d.payday_candidates": [
+          {
+            "day_of_month": 25,
+            "confidence": 1.0
+          },
+          {
+            "day_of_month": 30,
+            "confidence": 1.0
+          },
+          {
+            "day_of_month": 1,
+            "confidence": 1.0
+          }
+        ],
+        "windows.last_7d.totals_by_category_gbp": {
+          "eating_out": 28.0,
+          "shopping": 35.0
+        }
+      }
+    }
+  ],
+  "non_matches": []
+}

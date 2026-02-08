@@ -1,0 +1,17 @@
+{
+  "id": "late_night_spend",
+  "title": "Late-night Spend Pattern",
+  "vibe_prompt": "Gently flag late-night spending spikes and encourage pre-commitment tactics.",
+  "goal_tags": [
+    "spend_awareness"
+  ],
+  "evidence_keys_required": [
+    "windows.last_7d.late_night_tx_count"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 7,
+    "max_fires_per_30d": 4
+  },
+  "priority": 12,
+  "enabled": true
+}

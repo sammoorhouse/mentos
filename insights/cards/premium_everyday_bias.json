@@ -1,0 +1,18 @@
+{
+  "id": "premium_everyday_bias",
+  "title": "Premium Everyday Bias",
+  "vibe_prompt": "Point out when everyday spend skews to high-cost choices and offer alternatives.",
+  "goal_tags": [
+    "save_money"
+  ],
+  "evidence_keys_required": [
+    "windows.last_7d.totals_by_category_gbp",
+    "windows.last_7d.top_merchants_by_spend"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 10,
+    "max_fires_per_30d": 2
+  },
+  "priority": 30,
+  "enabled": true
+}

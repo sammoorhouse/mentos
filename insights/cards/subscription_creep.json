@@ -1,0 +1,18 @@
+{
+  "id": "subscription_creep",
+  "title": "Subscription Creep",
+  "vibe_prompt": "Highlight recurring charges and prompt a quick audit.",
+  "goal_tags": [
+    "save_money",
+    "declutter"
+  ],
+  "evidence_keys_required": [
+    "windows.last_30d.recurring_merchants_candidates"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 14,
+    "max_fires_per_30d": 2
+  },
+  "priority": 14,
+  "enabled": true
+}

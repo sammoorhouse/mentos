@@ -1,0 +1,19 @@
+{
+  "id": "cash_idle",
+  "title": "Cash Idle Nudge",
+  "vibe_prompt": "Detect sustained surplus and propose intentional allocation aligned to goals.",
+  "goal_tags": [
+    "investing",
+    "saving"
+  ],
+  "evidence_keys_required": [
+    "windows.last_90d.baseline_by_category_gbp_per_week",
+    "goals.recent_breakthroughs_count"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 21,
+    "max_fires_per_30d": 1
+  },
+  "priority": 40,
+  "enabled": true
+}

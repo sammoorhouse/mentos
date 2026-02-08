@@ -1,0 +1,26 @@
+{
+  "matches": [
+    {
+      "insight_id": "convenience_tax",
+      "message": "Mock message for convenience_tax",
+      "evidence": {
+        "windows.last_7d.small_purchase_count": 2,
+        "windows.last_7d.top_merchants_by_spend": [
+          {
+            "name": "Amazon",
+            "spend_gbp": 12.0
+          },
+          {
+            "name": "Sainsburys Local",
+            "spend_gbp": 4.5
+          },
+          {
+            "name": "Tesco Express",
+            "spend_gbp": 3.99
+          }
+        ]
+      }
+    }
+  ],
+  "non_matches": []
+}

@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "timezone": "Europe/London",
+    "now": "2026-01-31T12:00:00Z"
+  },
+  "goals": {
+    "active_goal_ids": [
+      "goal_save_money"
+    ],
+    "active_goal_tags": [
+      "save_money"
+    ],
+    "recent_breakthroughs_count": 1,
+    "recent_drift_events_count": 0
+  },
+  "preferences": {
+    "tone": "supportive",
+    "quiet_hours": {
+      "start": "22:00",
+      "end": "07:00"
+    },
+    "max_notifications_per_day": 3
+  },
+  "previous_notifications": [],
+  "monzo": {
+    "transactions": [
+      {
+        "created": "2026-01-21T12:00:00Z",
+        "amount": -2000,
+        "category": "groceries",
+        "merchant": {
+          "name": "Tesco"
+        },
+        "description": "card payment"
+      },
+      {
+        "created": "2026-01-06T12:00:00Z",
+        "amount": -1800,
+        "category": "groceries",
+        "merchant": {
+          "name": "Tesco"
+        },
+        "description": "card payment"
+      },
+      {
+        "created": "2025-12-22T09:00:00Z",
+        "amount": 220000,
+        "category": "income",
+        "merchant": {
+          "name": "ACME Payroll"
+        },
+        "description": "salary"
+      },
+      {
+        "created": "2025-12-30T09:00:00Z",
+        "amount": 240000,
+        "category": "income",
+        "merchant": {
+          "name": "ACME Payroll"
+        },
+        "description": "salary"
+      },
+      {
+        "created": "2025-12-01T09:00:00Z",
+        "amount": 240000,
+        "category": "income",
+        "merchant": {
+          "name": "ACME Payroll"
+        },
+        "description": "salary"
+      },
+      {
+        "created": "2025-11-22T14:00:00Z",
+        "amount": -1300,
+        "category": "groceries",
+        "merchant": {
+          "name": "Tesco"
+        },
+        "description": "card payment"
+      }
+    ]
+  }
+}

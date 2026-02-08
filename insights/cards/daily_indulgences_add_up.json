@@ -1,0 +1,18 @@
+{
+  "id": "daily_indulgences_add_up",
+  "title": "Small Treats Add Up",
+  "vibe_prompt": "Highlight repeated low-cost discretionary purchases and suggest one small swap.",
+  "goal_tags": [
+    "spend_awareness"
+  ],
+  "evidence_keys_required": [
+    "windows.last_7d.small_purchase_count",
+    "windows.last_7d.top_merchants_by_frequency"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 5,
+    "max_fires_per_30d": 3
+  },
+  "priority": 20,
+  "enabled": true
+}

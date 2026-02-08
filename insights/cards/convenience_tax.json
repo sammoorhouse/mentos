@@ -1,0 +1,18 @@
+{
+  "id": "convenience_tax",
+  "title": "Convenience Tax",
+  "vibe_prompt": "Identify signs of paying extra for convenience and suggest lower-friction alternatives.",
+  "goal_tags": [
+    "save_money"
+  ],
+  "evidence_keys_required": [
+    "windows.last_7d.small_purchase_count",
+    "windows.last_7d.top_merchants_by_spend"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 8,
+    "max_fires_per_30d": 3
+  },
+  "priority": 13,
+  "enabled": true
+}

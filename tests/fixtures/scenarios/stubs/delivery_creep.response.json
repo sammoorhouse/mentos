@@ -1,0 +1,17 @@
+{
+  "matches": [
+    {
+      "insight_id": "delivery_creep",
+      "message": "Mock message for delivery_creep",
+      "evidence": {
+        "windows.last_30d.category_totals_gbp": {
+          "eating_out": 49.0
+        },
+        "windows.last_14d.category_totals_gbp": {
+          "eating_out": 49.0
+        }
+      }
+    }
+  ],
+  "non_matches": []
+}

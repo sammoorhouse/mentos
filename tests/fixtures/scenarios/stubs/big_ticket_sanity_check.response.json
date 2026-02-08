@@ -1,0 +1,24 @@
+{
+  "matches": [
+    {
+      "insight_id": "big_ticket_sanity_check",
+      "message": "Mock message for big_ticket_sanity_check",
+      "evidence": {
+        "windows.last_7d.top_merchants_by_spend": [
+          {
+            "name": "Currys",
+            "spend_gbp": 650.0
+          },
+          {
+            "name": "Tesco",
+            "spend_gbp": 12.0
+          }
+        ],
+        "goals.active_goal_ids": [
+          "goal_save_money"
+        ]
+      }
+    }
+  ],
+  "non_matches": []
+}
