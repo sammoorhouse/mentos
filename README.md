@@ -77,6 +77,7 @@ Without an API key, mentos will use built-in default insight messages.
 - `mentos config set/get/list` manage rules
 
 See `docs/breakthroughs.md` for the breakthrough architecture and V1 scoring rules.
+See `docs/client-server-architecture.md` for the end-to-end client-server evolution plan.
 
 ## Mock responses
 
