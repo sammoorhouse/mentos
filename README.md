@@ -35,6 +35,22 @@ mentos config set sweep_min_residual 500   # £5.00
 mentos config set sweep_max_amount 2000    # £20.00
 ```
 
+
+## Excluding internal transfers from trends
+
+By default, `mentos db init` seeds spend filters to reduce skew in trend metrics:
+- `exclude_categories=["transfers", "savings"]`
+- `exclude_description_keywords=["pot_"]`
+
+You can inspect or override them:
+
+```bash
+mentos config get exclude_categories
+mentos config get exclude_description_keywords
+mentos config set exclude_categories '["transfers","savings"]'
+mentos config set exclude_description_keywords '["pot_","internal transfer"]'
+```
+
 ## Commands
 
 - `mentos db init` initialize SQLite + apply migrations

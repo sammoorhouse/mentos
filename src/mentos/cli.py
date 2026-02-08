@@ -34,6 +34,10 @@ def cmd_db_init(args) -> None:
         set_rule(conn, user_id, "quiet_hours_end", "07:00")
     if get_rule(conn, "sweep_enabled") is None:
         set_rule(conn, user_id, "sweep_enabled", False)
+    if get_rule(conn, "exclude_categories") is None:
+        set_rule(conn, user_id, "exclude_categories", ["transfers", "savings"])
+    if get_rule(conn, "exclude_description_keywords") is None:
+        set_rule(conn, user_id, "exclude_description_keywords", ["pot_"])
     logger.info("DB ready at %s", settings.db_path)
 
 
