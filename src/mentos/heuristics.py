@@ -3,6 +3,8 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from statistics import median
 
+from .spend_filters import build_spend_filter_clause
+
 logger = logging.getLogger("mentos.heuristics")
 
 
@@ -40,12 +42,13 @@ def category_outliers(conn, days: int = 60) -> list[dict]:
 
 def late_night_spend_count(conn, days: int = 7, tz=None) -> int:
     since = (datetime.utcnow() - timedelta(days=days)).isoformat()
+    filter_clause, filter_params = build_spend_filter_clause(conn)
     cur = conn.execute(
-        """
+        f"""
         SELECT created_at, amount FROM transactions
-        WHERE created_at >= ? AND amount < 0 AND is_pending = 0
+        WHERE created_at >= ? AND amount < 0 AND is_pending = 0{filter_clause}
         """,
-        (since,),
+        (since, *filter_params),
     )
     count = 0
     for created_at, amount in cur.fetchall():
@@ -66,24 +69,25 @@ def budget_drift(conn) -> dict:
     last_7 = (now - timedelta(days=7)).isoformat()
     prev_35 = (now - timedelta(days=35)).isoformat()
     prev_7 = (now - timedelta(days=7)).isoformat()
+    filter_clause, filter_params = build_spend_filter_clause(conn)
 
     cur = conn.execute(
-        """
+        f"""
         SELECT SUM(CASE WHEN amount < 0 THEN -amount ELSE 0 END)
         FROM transactions
-        WHERE created_at >= ? AND is_pending = 0
+        WHERE created_at >= ? AND is_pending = 0{filter_clause}
         """,
-        (last_7,),
+        (last_7, *filter_params),
     )
     last7 = cur.fetchone()[0] or 0
 
     cur = conn.execute(
-        """
+        f"""
         SELECT SUM(CASE WHEN amount < 0 THEN -amount ELSE 0 END)
         FROM transactions
-        WHERE created_at >= ? AND created_at < ? AND is_pending = 0
+        WHERE created_at >= ? AND created_at < ? AND is_pending = 0{filter_clause}
         """,
-        (prev_35, prev_7),
+        (prev_35, prev_7, *filter_params),
     )
     prev28 = cur.fetchone()[0] or 0
 
@@ -94,13 +98,14 @@ def budget_drift(conn) -> dict:
 
 def recurring_merchants(conn, months: int = 6) -> list[str]:
     since = (datetime.utcnow() - timedelta(days=months * 30)).isoformat()
+    filter_clause, filter_params = build_spend_filter_clause(conn)
     cur = conn.execute(
-        """
+        f"""
         SELECT merchant_name, date(created_at) as day
         FROM transactions
-        WHERE created_at >= ? AND amount < 0 AND is_pending = 0 AND merchant_name IS NOT NULL
+        WHERE created_at >= ? AND amount < 0 AND is_pending = 0 AND merchant_name IS NOT NULL{filter_clause}
         """,
-        (since,),
+        (since, *filter_params),
     )
     by_merchant = defaultdict(set)
     for merchant_name, day in cur.fetchall():

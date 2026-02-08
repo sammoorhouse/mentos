@@ -1,6 +1,8 @@
 import logging
 from datetime import datetime, timedelta, timezone
 
+from .spend_filters import build_spend_filter_clause
+
 logger = logging.getLogger("mentos.aggregates")
 
 
@@ -13,18 +15,19 @@ def rebuild_daily(conn, days: int = 35) -> None:
         (since_iso,),
     )
 
+    filter_clause, filter_params = build_spend_filter_clause(conn)
     cur = conn.execute(
-        """
+        f"""
         SELECT
           date(COALESCE(settled_at, created_at)) as day,
           category,
           SUM(CASE WHEN amount < 0 THEN -amount ELSE 0 END) as total_amount,
           SUM(CASE WHEN amount < 0 THEN 1 ELSE 0 END) as cnt
         FROM transactions
-        WHERE created_at >= ? AND is_pending = 0
+        WHERE created_at >= ? AND is_pending = 0{filter_clause}
         GROUP BY day, category
         """,
-        (since_iso,),
+        (since_iso, *filter_params),
     )
 
     rows = cur.fetchall()
