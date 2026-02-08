@@ -1,0 +1,19 @@
+{
+  "id": "delivery_creep",
+  "title": "Delivery Creep",
+  "vibe_prompt": "Surface rising convenience-delivery patterns versus recent baseline.",
+  "goal_tags": [
+    "save_money",
+    "meal_planning"
+  ],
+  "evidence_keys_required": [
+    "windows.last_30d.category_totals_gbp",
+    "windows.last_14d.category_totals_gbp"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 7,
+    "max_fires_per_30d": 3
+  },
+  "priority": 10,
+  "enabled": true
+}

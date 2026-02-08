@@ -1,0 +1,30 @@
+{
+  "matches": [
+    {
+      "insight_id": "daily_indulgences_add_up",
+      "message": "Mock message for daily_indulgences_add_up",
+      "evidence": {
+        "windows.last_7d.small_purchase_count": 4,
+        "windows.last_7d.top_merchants_by_frequency": [
+          {
+            "name": "Starbucks",
+            "count": 1
+          },
+          {
+            "name": "Costa",
+            "count": 1
+          },
+          {
+            "name": "Boots",
+            "count": 1
+          },
+          {
+            "name": "WHSmith",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ],
+  "non_matches": []
+}

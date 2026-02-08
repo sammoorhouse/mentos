@@ -1,0 +1,12 @@
+{
+  "matches": [
+    {
+      "insight_id": "late_night_spend",
+      "message": "Mock message for late_night_spend",
+      "evidence": {
+        "windows.last_7d.late_night_tx_count": 3
+      }
+    }
+  ],
+  "non_matches": []
+}

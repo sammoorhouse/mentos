@@ -1,0 +1,18 @@
+{
+  "id": "payday_surge",
+  "title": "Payday Surge",
+  "vibe_prompt": "Notice payday-related spend surges and recommend setting a post-payday plan.",
+  "goal_tags": [
+    "budgeting"
+  ],
+  "evidence_keys_required": [
+    "windows.last_90d.payday_candidates",
+    "windows.last_7d.totals_by_category_gbp"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 10,
+    "max_fires_per_30d": 2
+  },
+  "priority": 16,
+  "enabled": true
+}

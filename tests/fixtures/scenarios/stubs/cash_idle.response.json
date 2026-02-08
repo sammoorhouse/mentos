@@ -1,0 +1,15 @@
+{
+  "matches": [
+    {
+      "insight_id": "cash_idle",
+      "message": "Mock message for cash_idle",
+      "evidence": {
+        "windows.last_90d.baseline_by_category_gbp_per_week": {
+          "groceries": 4.25
+        },
+        "goals.recent_breakthroughs_count": 1
+      }
+    }
+  ],
+  "non_matches": []
+}

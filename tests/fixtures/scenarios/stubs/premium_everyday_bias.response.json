@@ -1,0 +1,28 @@
+{
+  "matches": [
+    {
+      "insight_id": "premium_everyday_bias",
+      "message": "Mock message for premium_everyday_bias",
+      "evidence": {
+        "windows.last_7d.totals_by_category_gbp": {
+          "groceries": 79.0
+        },
+        "windows.last_7d.top_merchants_by_spend": [
+          {
+            "name": "Waitrose",
+            "spend_gbp": 35.0
+          },
+          {
+            "name": "M&S",
+            "spend_gbp": 29.0
+          },
+          {
+            "name": "Tesco",
+            "spend_gbp": 15.0
+          }
+        ]
+      }
+    }
+  ],
+  "non_matches": []
+}

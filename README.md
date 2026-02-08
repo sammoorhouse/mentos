@@ -1,87 +1,48 @@
 # mentos (Python)
 
-Local-first personal finance nudges.
+Local-first personal finance nudges, with a fixed Insight Card library + LLM matching.
 
-## Quick start
+## Insight architecture
 
-```bash
-cd /Users/sam/dev/sammoorhouse/mentos
-python3 -m venv .venv
-. .venv/bin/activate
-pip install -e .
-cp .env.example .env
+- Insight cards are stored in `insights/cards/*.json` with stable `snake_case` IDs.
+- `build_spend_context` creates deterministic rollups from Monzo-style transactions.
+- The LLM performs non-deterministic matching/copywriting with strict JSON validation.
+- Server-side validation rejects unknown `insight_id`s and invalid evidence paths.
+- Notification gating enforces quiet hours, daily caps, per-card cooldowns, and dedupe.
 
-# Generate an encryption key (32 bytes base64)
-python - <<'PY'
-import os, base64
-print(base64.b64encode(os.urandom(32)).decode())
-PY
+## Merchant-name policy
 
-# Fill .env (Pushover + encryption key + Monzo token)
-mentos db init
-mentos token set "<your-monzo-personal-token>"
-mentos notify-test
-mentos sync
-mentos run
-```
+Production logic must remain merchant-name-agnostic.
 
-## Configure sweep (example)
+Allowed merchant-name usage:
+- Monzo transaction evidence in SpendContext output.
+- Test fixtures under `tests/fixtures`.
+- Optional LLM-generated user copy that references context evidence.
 
-```bash
-mentos config set sweep_enabled true
-mentos config set daily_spend_pot_id "pot_123"
-mentos config set savings_pot_id "pot_456"
-mentos config set sweep_min_residual 500   # £5.00
-mentos config set sweep_max_amount 2000    # £20.00
-```
+Not allowed:
+- Hard-coded merchant-name matching logic in `src/mentos`.
 
+Enforced by unit test: `tests/unit/test_merchant_name_policy.py`.
 
-## Excluding internal transfers from trends
+## Add a new Insight Card
 
-By default, `mentos db init` seeds spend filters to reduce skew in trend metrics:
-- `exclude_categories=["transfers", "savings"]`
-- `exclude_description_keywords=["pot_"]`
+1. Add `insights/cards/<new_id>.json`.
+2. Include required fields (`id`, `title`, `vibe_prompt`, `goal_tags`, `evidence_keys_required`, `cooldown`, `priority`).
+3. Use only valid `evidence_keys_required` from SpendContext schema.
+4. Add scenario fixture `tests/fixtures/scenarios/<new_id>.json`.
+5. Add stub LLM response `tests/fixtures/scenarios/stubs/<new_id>.response.json`.
+6. Ensure the card is covered by deterministic tests.
 
-You can inspect or override them:
+## Tests
 
 ```bash
-mentos config get exclude_categories
-mentos config get exclude_description_keywords
-mentos config set exclude_categories '["transfers","savings"]'
-mentos config set exclude_description_keywords '["pot_","internal transfer"]'
+PYTHONPATH=src python -m unittest discover -s tests -p 'test*.py'
 ```
 
-## ChatGPT insight personalization
-
-To enable ChatGPT-generated monthly insight messages, set:
+## Optional real-LLM harness
 
 ```bash
-export CHATGPT_API_KEY="<your-openai-key>"
-# optional
-export CHATGPT_MODEL="gpt-4o-mini"
-export CHATGPT_BASE_URL="https://api.openai.com/v1"
+PYTHONPATH=src OPENAI_API_KEY=... python scripts/test_llm_integration.py
 ```
 
-Without an API key, mentos will use built-in default insight messages.
-
-## Commands
-
-- `mentos db init` initialize SQLite + apply migrations
-- `mentos token set <token>` store Monzo personal token (encrypted)
-- `mentos sync` one-off Monzo sync
-- `mentos notify-test` send a test push notification
-- `mentos run` run the local loop (poll + scheduled jobs)
-- `mentos report --notify` generate nightly report now
-- `mentos breakthroughs --notify` run weekly breakthrough detection now
-- `mentos sweep` run daily sweep now
-- `mentos config set/get/list` manage rules
-
-See `docs/breakthroughs.md` for the breakthrough architecture and V1 scoring rules.
-See `docs/client-server-architecture.md` for the end-to-end client-server evolution plan.
-
-## Mock responses
-
-Mock API payloads live in:
-- `/Users/sam/dev/sammoorhouse/mentos/scripts/mocks/monzo_accounts.json`
-- `/Users/sam/dev/sammoorhouse/mentos/scripts/mocks/monzo_pots.json`
-- `/Users/sam/dev/sammoorhouse/mentos/scripts/mocks/monzo_transactions.json`
+This writes snapshots to `tests/integration_snapshots/*.json` and is not required for CI.

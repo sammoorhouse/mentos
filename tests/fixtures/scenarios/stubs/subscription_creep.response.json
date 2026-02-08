@@ -1,0 +1,21 @@
+{
+  "matches": [
+    {
+      "insight_id": "subscription_creep",
+      "message": "Mock message for subscription_creep",
+      "evidence": {
+        "windows.last_30d.recurring_merchants_candidates": [
+          {
+            "name": "Netflix",
+            "approx_period_days": 13
+          },
+          {
+            "name": "Spotify",
+            "approx_period_days": 15
+          }
+        ]
+      }
+    }
+  ],
+  "non_matches": []
+}

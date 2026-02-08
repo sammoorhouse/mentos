@@ -1,0 +1,16 @@
+{
+  "matches": [
+    {
+      "insight_id": "on_plan_praise",
+      "message": "Mock message for on_plan_praise",
+      "evidence": {
+        "goals.recent_breakthroughs_count": 3,
+        "goals.active_goal_tags": [
+          "motivation",
+          "save_money"
+        ]
+      }
+    }
+  ],
+  "non_matches": []
+}

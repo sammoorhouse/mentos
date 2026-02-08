@@ -1,0 +1,18 @@
+{
+  "id": "big_ticket_sanity_check",
+  "title": "Big-ticket Sanity Check",
+  "vibe_prompt": "For large transactions, suggest a calm review and confirmation of fit with goals.",
+  "goal_tags": [
+    "save_money"
+  ],
+  "evidence_keys_required": [
+    "windows.last_7d.top_merchants_by_spend",
+    "goals.active_goal_ids"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 14,
+    "max_fires_per_30d": 2
+  },
+  "priority": 15,
+  "enabled": true
+}

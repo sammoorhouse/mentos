@@ -1,0 +1,18 @@
+{
+  "id": "eating_out_frequency",
+  "title": "Eating Out Frequency",
+  "vibe_prompt": "Call out frequent dining-out behavior and suggest a practical next action.",
+  "goal_tags": [
+    "save_money"
+  ],
+  "evidence_keys_required": [
+    "windows.last_7d.totals_by_category_gbp",
+    "windows.last_14d.category_totals_gbp"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 7,
+    "max_fires_per_30d": 3
+  },
+  "priority": 11,
+  "enabled": true
+}

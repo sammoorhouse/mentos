@@ -108,14 +108,7 @@ def _sum_spend_for_window(conn, start: datetime, end: datetime, mode: str) -> fl
             WHERE created_at >= ?
               AND created_at < ?
               AND is_pending = 0
-              AND (
-                    lower(COALESCE(description, '')) LIKE '%deliveroo%'
-                 OR lower(COALESCE(description, '')) LIKE '%uber eats%'
-                 OR lower(COALESCE(description, '')) LIKE '%just eat%'
-                 OR lower(COALESCE(merchant_name, '')) LIKE '%deliveroo%'
-                 OR lower(COALESCE(merchant_name, '')) LIKE '%uber eats%'
-                 OR lower(COALESCE(merchant_name, '')) LIKE '%just eat%'
-              )
+              AND category = 'eating_out'
             """,
             (start.isoformat(), end.isoformat()),
         )

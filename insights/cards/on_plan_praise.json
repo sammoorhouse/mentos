@@ -1,0 +1,18 @@
+{
+  "id": "on_plan_praise",
+  "title": "On-plan Praise",
+  "vibe_prompt": "Celebrate positive momentum with specific evidence and reinforce consistency.",
+  "goal_tags": [
+    "motivation"
+  ],
+  "evidence_keys_required": [
+    "goals.recent_breakthroughs_count",
+    "goals.active_goal_tags"
+  ],
+  "cooldown": {
+    "min_days_between_fires": 4,
+    "max_fires_per_30d": 5
+  },
+  "priority": 5,
+  "enabled": true
+}
