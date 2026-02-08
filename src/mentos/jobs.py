@@ -4,8 +4,9 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from .aggregates import rebuild_daily
+from .breakthroughs import detect_breakthroughs, seed_v1_goals, update_weekly_goal_progress
 from .chatgpt import ChatGPTClient
-from .notifications import PushoverClient, can_send
+from .notifications import Notification, PushoverClient, can_send
 from .reports import (
     monthly_review as generate_monthly_review,
 )
@@ -104,6 +105,40 @@ def monthly_review(
     today = datetime.now(tz).date()
     run_key = f"{today.year}-{today.month:02d}"
     run_idempotent(conn, "monthly_review", run_key, _run)
+
+
+def weekly_breakthrough_review(
+    conn,
+    tz: ZoneInfo,
+    notifier: PushoverClient | None = None,
+    chatgpt_client: ChatGPTClient | None = None,
+):
+    def _run():
+        seed_v1_goals(conn)
+        update_weekly_goal_progress(conn)
+        breakthroughs = detect_breakthroughs(conn, chatgpt_client=chatgpt_client)
+        if not breakthroughs or not notifier:
+            return
+
+        if can_send(
+            conn,
+            tz,
+            int(get_rule(conn, "max_notifications_per_day") or 6),
+            str(get_rule(conn, "quiet_hours_start") or ""),
+            str(get_rule(conn, "quiet_hours_end") or ""),
+        ):
+            for b in breakthroughs:
+                notifier.send(
+                    Notification(
+                        title="You’ve hit a breakthrough.",
+                        message=f"{b['message']} {b['next_goal_suggestion']}",
+                    ),
+                    conn=conn,
+                )
+
+    today = datetime.now(tz).date()
+    week_key = f"{today.isocalendar().year}-W{today.isocalendar().week:02d}"
+    run_idempotent(conn, "weekly_breakthrough_review", week_key, _run)
 
 
 def poll_and_aggregate(conn, token: str | None) -> None:

@@ -72,8 +72,11 @@ Without an API key, mentos will use built-in default insight messages.
 - `mentos notify-test` send a test push notification
 - `mentos run` run the local loop (poll + scheduled jobs)
 - `mentos report --notify` generate nightly report now
+- `mentos breakthroughs --notify` run weekly breakthrough detection now
 - `mentos sweep` run daily sweep now
 - `mentos config set/get/list` manage rules
+
+See `docs/breakthroughs.md` for the breakthrough architecture and V1 scoring rules.
 
 ## Mock responses
 
