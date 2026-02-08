@@ -119,88 +119,84 @@ PYTHONPATH=server pytest server/tests -q
 - Server behavior remains merchant-name-agnostic in production matching.
 - Merchant literal policy remains enforced in tests.
 
-## Deploy to Fly.io (v0.1)
+## Deploy v0.1 to Fly.io + Neon
 
-### Prerequisites
-- Install Fly CLI (`flyctl`): https://fly.io/docs/hands-on/install-flyctl/
-- Sign in: `fly auth login`
-- Provision Postgres (`DATABASE_URL`) via Fly Postgres or Neon (Neon free tier is a good default)
+For a full runbook, see `docs/DEPLOY_FLY_NEON.md`.
 
-### Create the Fly app
+### 1) Create Neon project and copy `DATABASE_URL`
+
+1. Create a Neon account/project.
+2. Copy the Postgres connection string into `DATABASE_URL`.
+3. Prefer a **direct** Neon connection for Fly (always-on app).
+4. Ensure SSL is enabled in the URL (for example `sslmode=require`).
+
+### 2) Prepare deploy env file
+
 ```bash
-cd server
-fly launch --region lhr --no-deploy
-# if the name is already taken:
-fly launch --name mentos-<suffix> --region lhr --no-deploy
+cp server/.env.deploy.example server/.env.deploy
 ```
 
-### Configure required secrets
-Set all runtime secrets via Fly (never commit plaintext secrets):
+Fill all required variables:
+- `FLY_APP_NAME`
 - `DATABASE_URL`
 - `JWT_SECRET`
 - `TOKEN_ENCRYPTION_KEY_B64`
-- `APPLE_AUDIENCE`
-- `APNS_TEAM_ID`
-- `APNS_KEY_ID`
-- `APNS_BUNDLE_ID`
-- `APNS_AUTH_KEY_P8` (or `APNS_AUTH_KEY_PATH` strategy)
-- `APNS_USE_SANDBOX`
-- `MONZO_CLIENT_ID`
-- `MONZO_CLIENT_SECRET` (if used)
-- `MONZO_REDIRECT_URI`
-- `MONZO_SCOPES`
 
-Example:
+Then add Apple/Monzo/APNs values as needed.
+
+### 3) Generate secrets
+
 ```bash
-fly secrets set \
-  DATABASE_URL='postgresql://<user>:<pass>@<host>/<db>?sslmode=require' \
-  JWT_SECRET='<jwt-secret>' \
-  TOKEN_ENCRYPTION_KEY_B64='<base64-key>' \
-  APPLE_AUDIENCE='com.example.mentos' \
-  APNS_TEAM_ID='<team-id>' \
-  APNS_KEY_ID='<key-id>' \
-  APNS_BUNDLE_ID='com.example.mentos' \
-  APNS_USE_SANDBOX='true' \
-  MONZO_CLIENT_ID='<client-id>' \
-  MONZO_CLIENT_SECRET='<client-secret>' \
-  MONZO_REDIRECT_URI='mentos://oauth/monzo' \
-  MONZO_SCOPES='accounts balance:read transactions:read'
+./scripts/gen_secrets.sh
 ```
 
-For multiline APNs auth keys:
-```bash
-fly secrets set APNS_AUTH_KEY_P8="$(cat /path/to/AuthKey_ABC123.p8)"
-```
-(Alternative: mount a secret file and set `APNS_AUTH_KEY_PATH`.)
+Paste generated values into `server/.env.deploy`.
 
-### Deploy
+### 4) Install Fly CLI and log in
+
 ```bash
-fly deploy
+fly auth login
 ```
 
-### Ensure both processes are running
+### 5) Create Fly app (once)
+
 ```bash
-fly scale count web=1 worker=1
+cd server
+fly launch --no-deploy --region lhr --name <your-app-name>
+cd ..
 ```
 
-### Verify deployment
+### 6) Deploy
+
 ```bash
-fly status
-curl https://<your-app>.fly.dev/health
-fly logs --app <your-app>
+./scripts/deploy_fly_neon.sh server/.env.deploy
 ```
 
-### Migrations
-Deploys run migrations automatically via Fly release command:
-- `alembic -c alembic.ini upgrade head`
+### 7) Verify
+
+```bash
+./scripts/smoke_test.sh <your-app-name>
+```
+
+You can also pass a full URL:
+
+```bash
+./scripts/smoke_test.sh https://<your-app-name>.fly.dev
+```
+
+### 8) Migrations
+
+Migrations run automatically on deploy via Fly `release_command`.
+
+Check release output:
+
+```bash
+fly logs --app <your-app-name>
+```
 
 Manual fallback:
+
 ```bash
-fly ssh console -C "cd /app && alembic -c alembic.ini upgrade head"
+fly ssh console -C "cd /app && alembic upgrade head" --app <your-app-name>
 ```
 
-### Troubleshooting
-- **Health check failing**: verify `PORT=8080`, `/health` returns `{"status":"ok"}`, and web process is healthy.
-- **Worker not running**: ensure process scaling is set (`fly scale count web=1 worker=1`) and inspect `fly logs`.
-- **APNs sandbox mismatch**: set `APNS_USE_SANDBOX` to match the app provisioning profile/environment.
-- **Monzo redirect mismatch**: ensure `MONZO_REDIRECT_URI` exactly matches your Monzo developer app config.
