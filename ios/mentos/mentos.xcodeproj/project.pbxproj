@@ -12,6 +12,33 @@
 		AFC9AFA12932A45876E96B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F80565C6CAA07479111232 /* Assets.xcassets */; };
 		DCC2525CF9D08F00256ABE13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */; };
 		F0279779BBF775E46EDBF6A4 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A92E6703590122B4FA95551 /* SessionStore.swift */; };
+		EECB6C67CFB512E9E3E19339 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BEC574EAB13C26531BD21 /* DesignSystem/DS.swift */; };
+		91DB58A704E9CBD0E67F8096 /* DSTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532F4A72C4BC8D7F0D7E81B1 /* DesignSystem/DSTypography.swift */; };
+		D398FEA2BC4596A0C204CBE6 /* DSSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BF4F9959EB47FFD91C2C8 /* DesignSystem/DSSpacing.swift */; };
+		2BC36D417B361AF091B5BB67 /* DSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B34879D0C3F84C7A3BC92 /* DesignSystem/DSComponents/DSCard.swift */; };
+		BC07FE4B3FD446371A5F5646 /* DSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A723C7AF2E43B478D697C6 /* DesignSystem/DSComponents/DSButton.swift */; };
+		B1B7435EC05E816C0726BDC7 /* DSChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44065A536B58104118294532 /* DesignSystem/DSComponents/DSChip.swift */; };
+		AEE191D95103776930EFDE83 /* DSSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0C33A63C097F9784384198 /* DesignSystem/DSComponents/DSSectionHeader.swift */; };
+		2D9CA254E8DFBBCA9FBB4BB5 /* DSEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D02E566300287DD19DC2A0 /* DesignSystem/DSComponents/DSEmptyState.swift */; };
+		F7074F797C2DF1EACC4C3B54 /* DSRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146C6482957BC6E87BF2E06 /* DesignSystem/DSComponents/DSRow.swift */; };
+		D27CE449E3FE50F01A2A2FEB /* DSProgressDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D66157B3900DD3520B843 /* DesignSystem/DSComponents/DSProgressDots.swift */; };
+		7ADF2FA33FC5D5C5DCDB83E8 /* DSCalendarWeeks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FB69807C0AACADBCB34B04 /* DesignSystem/DSComponents/DSCalendarWeeks.swift */; };
+		2E234D1393F25AA3A2AE7602 /* DSSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC954D45AFB56CE80776A278 /* DesignSystem/DSComponents/DSSkeleton.swift */; };
+		C00E437D810A32A9EF865259 /* DSShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FFD9D00EB5BA9B7E4BB774 /* DesignSystem/DSStyles/DSShadow.swift */; };
+		82134979F20173A2ABD9FD3B /* DSSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC790302D9B0F55DAFF21CA /* DesignSystem/DSStyles/DSSeparator.swift */; };
+		09E8C92C05015896F4150488 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94511ECCF855508FDA9F47 /* Screens/Auth/SignInView.swift */; };
+		72F2BEE9FEFC2C88D0E0FEB6 /* OnboardingShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB375CB59D5A24F9CBCC063F /* Screens/Onboarding/OnboardingShell.swift */; };
+		2E40DF18A4A7725863E50700 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D6E8B9BBC526BB20EA031 /* Screens/Onboarding/WelcomeView.swift */; };
+		79D85A52B8350DF4519B45B7 /* ConnectMonzoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9F70DFA1D1A61641DFC37 /* Screens/Onboarding/ConnectMonzoView.swift */; };
+		574FE9750FE60F0854458EEE /* GoalSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060CFE3CD9FD913F891DE667 /* Screens/Onboarding/GoalSelectionView.swift */; };
+		3B90742BC9B6282F8BE812F7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7267051D7B497AF3CF2C8 /* Screens/Main/MainTabView.swift */; };
+		0586495811561F9BBEF91DE2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F0E72D1D4EC3E993528A /* Screens/Main/HomeView.swift */; };
+		FD3F8AF4D9AF4FE2D6D44119 /* InsightsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156397B65429B0FEA0963635 /* Screens/Insights/InsightsListView.swift */; };
+		928911E1035354538F9B90BD /* InsightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD4A83C934140B50DADECD /* Screens/Insights/InsightDetailView.swift */; };
+		A148731D2999EAC1DF90E89E /* GoalsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17474F562A2532D19F95213E /* Screens/Goals/GoalsListView.swift */; };
+		B2BED30400F7E4396829A727 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FCF6A85231E4008A3CD2E /* Screens/Goals/GoalDetailView.swift */; };
+		A3C0CB43B438FF74D0ACE3BB /* BreakthroughsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6714C12DB75CADD4FA6C7CDF /* Screens/Breakthroughs/BreakthroughsListView.swift */; };
+		AA02A05A0E78E0FC13BCAF26 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F91A6C9FE6178C37239283 /* Screens/Settings/SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +49,33 @@
 		A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D3F80565C6CAA07479111232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D43A8BBB968E3C1A4376B208 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		6C9BEC574EAB13C26531BD21 /* DesignSystem/DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DS.swift; sourceTree = "<group>"; };
+		532F4A72C4BC8D7F0D7E81B1 /* DesignSystem/DSTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSTypography.swift; sourceTree = "<group>"; };
+		8E0BF4F9959EB47FFD91C2C8 /* DesignSystem/DSSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSSpacing.swift; sourceTree = "<group>"; };
+		3E8B34879D0C3F84C7A3BC92 /* DesignSystem/DSComponents/DSCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSCard.swift; sourceTree = "<group>"; };
+		B7A723C7AF2E43B478D697C6 /* DesignSystem/DSComponents/DSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSButton.swift; sourceTree = "<group>"; };
+		44065A536B58104118294532 /* DesignSystem/DSComponents/DSChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSChip.swift; sourceTree = "<group>"; };
+		6C0C33A63C097F9784384198 /* DesignSystem/DSComponents/DSSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSSectionHeader.swift; sourceTree = "<group>"; };
+		D0D02E566300287DD19DC2A0 /* DesignSystem/DSComponents/DSEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSEmptyState.swift; sourceTree = "<group>"; };
+		E146C6482957BC6E87BF2E06 /* DesignSystem/DSComponents/DSRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSRow.swift; sourceTree = "<group>"; };
+		D64D66157B3900DD3520B843 /* DesignSystem/DSComponents/DSProgressDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSProgressDots.swift; sourceTree = "<group>"; };
+		97FB69807C0AACADBCB34B04 /* DesignSystem/DSComponents/DSCalendarWeeks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSCalendarWeeks.swift; sourceTree = "<group>"; };
+		AC954D45AFB56CE80776A278 /* DesignSystem/DSComponents/DSSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSComponents/DSSkeleton.swift; sourceTree = "<group>"; };
+		05FFD9D00EB5BA9B7E4BB774 /* DesignSystem/DSStyles/DSShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSStyles/DSShadow.swift; sourceTree = "<group>"; };
+		CDC790302D9B0F55DAFF21CA /* DesignSystem/DSStyles/DSSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSStyles/DSSeparator.swift; sourceTree = "<group>"; };
+		CE94511ECCF855508FDA9F47 /* Screens/Auth/SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Auth/SignInView.swift; sourceTree = "<group>"; };
+		CB375CB59D5A24F9CBCC063F /* Screens/Onboarding/OnboardingShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Onboarding/OnboardingShell.swift; sourceTree = "<group>"; };
+		AD1D6E8B9BBC526BB20EA031 /* Screens/Onboarding/WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Onboarding/WelcomeView.swift; sourceTree = "<group>"; };
+		1FD9F70DFA1D1A61641DFC37 /* Screens/Onboarding/ConnectMonzoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Onboarding/ConnectMonzoView.swift; sourceTree = "<group>"; };
+		060CFE3CD9FD913F891DE667 /* Screens/Onboarding/GoalSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Onboarding/GoalSelectionView.swift; sourceTree = "<group>"; };
+		BDD7267051D7B497AF3CF2C8 /* Screens/Main/MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Main/MainTabView.swift; sourceTree = "<group>"; };
+		4A19F0E72D1D4EC3E993528A /* Screens/Main/HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Main/HomeView.swift; sourceTree = "<group>"; };
+		156397B65429B0FEA0963635 /* Screens/Insights/InsightsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Insights/InsightsListView.swift; sourceTree = "<group>"; };
+		81BD4A83C934140B50DADECD /* Screens/Insights/InsightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Insights/InsightDetailView.swift; sourceTree = "<group>"; };
+		17474F562A2532D19F95213E /* Screens/Goals/GoalsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Goals/GoalsListView.swift; sourceTree = "<group>"; };
+		DD7FCF6A85231E4008A3CD2E /* Screens/Goals/GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Goals/GoalDetailView.swift; sourceTree = "<group>"; };
+		6714C12DB75CADD4FA6C7CDF /* Screens/Breakthroughs/BreakthroughsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Breakthroughs/BreakthroughsListView.swift; sourceTree = "<group>"; };
+		20F91A6C9FE6178C37239283 /* Screens/Settings/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Settings/SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +103,33 @@
 				4422B2B55FDE245C5DC2DB7A /* App.swift */,
 				D43A8BBB968E3C1A4376B208 /* RootView.swift */,
 				8A92E6703590122B4FA95551 /* SessionStore.swift */,
+				6C9BEC574EAB13C26531BD21 /* DesignSystem/DS.swift */,
+				532F4A72C4BC8D7F0D7E81B1 /* DesignSystem/DSTypography.swift */,
+				8E0BF4F9959EB47FFD91C2C8 /* DesignSystem/DSSpacing.swift */,
+				3E8B34879D0C3F84C7A3BC92 /* DesignSystem/DSComponents/DSCard.swift */,
+				B7A723C7AF2E43B478D697C6 /* DesignSystem/DSComponents/DSButton.swift */,
+				44065A536B58104118294532 /* DesignSystem/DSComponents/DSChip.swift */,
+				6C0C33A63C097F9784384198 /* DesignSystem/DSComponents/DSSectionHeader.swift */,
+				D0D02E566300287DD19DC2A0 /* DesignSystem/DSComponents/DSEmptyState.swift */,
+				E146C6482957BC6E87BF2E06 /* DesignSystem/DSComponents/DSRow.swift */,
+				D64D66157B3900DD3520B843 /* DesignSystem/DSComponents/DSProgressDots.swift */,
+				97FB69807C0AACADBCB34B04 /* DesignSystem/DSComponents/DSCalendarWeeks.swift */,
+				AC954D45AFB56CE80776A278 /* DesignSystem/DSComponents/DSSkeleton.swift */,
+				05FFD9D00EB5BA9B7E4BB774 /* DesignSystem/DSStyles/DSShadow.swift */,
+				CDC790302D9B0F55DAFF21CA /* DesignSystem/DSStyles/DSSeparator.swift */,
+				CE94511ECCF855508FDA9F47 /* Screens/Auth/SignInView.swift */,
+				CB375CB59D5A24F9CBCC063F /* Screens/Onboarding/OnboardingShell.swift */,
+				AD1D6E8B9BBC526BB20EA031 /* Screens/Onboarding/WelcomeView.swift */,
+				1FD9F70DFA1D1A61641DFC37 /* Screens/Onboarding/ConnectMonzoView.swift */,
+				060CFE3CD9FD913F891DE667 /* Screens/Onboarding/GoalSelectionView.swift */,
+				BDD7267051D7B497AF3CF2C8 /* Screens/Main/MainTabView.swift */,
+				4A19F0E72D1D4EC3E993528A /* Screens/Main/HomeView.swift */,
+				156397B65429B0FEA0963635 /* Screens/Insights/InsightsListView.swift */,
+				81BD4A83C934140B50DADECD /* Screens/Insights/InsightDetailView.swift */,
+				17474F562A2532D19F95213E /* Screens/Goals/GoalsListView.swift */,
+				DD7FCF6A85231E4008A3CD2E /* Screens/Goals/GoalDetailView.swift */,
+				6714C12DB75CADD4FA6C7CDF /* Screens/Breakthroughs/BreakthroughsListView.swift */,
+				20F91A6C9FE6178C37239283 /* Screens/Settings/SettingsView.swift */,
 				D3F80565C6CAA07479111232 /* Assets.xcassets */,
 				8F9EDABC149CC7A468786974 /* Preview Content */,
 				4962839057D055453C727185 /* Info.plist */,
@@ -145,6 +226,33 @@
 				040F698C10B68302AF02A561 /* App.swift in Sources */,
 				1B8C5E9791786BE1DBF7AB7F /* RootView.swift in Sources */,
 				F0279779BBF775E46EDBF6A4 /* SessionStore.swift in Sources */,
+				EECB6C67CFB512E9E3E19339 /* DS.swift in Sources */,
+				91DB58A704E9CBD0E67F8096 /* DSTypography.swift in Sources */,
+				D398FEA2BC4596A0C204CBE6 /* DSSpacing.swift in Sources */,
+				2BC36D417B361AF091B5BB67 /* DSCard.swift in Sources */,
+				BC07FE4B3FD446371A5F5646 /* DSButton.swift in Sources */,
+				B1B7435EC05E816C0726BDC7 /* DSChip.swift in Sources */,
+				AEE191D95103776930EFDE83 /* DSSectionHeader.swift in Sources */,
+				2D9CA254E8DFBBCA9FBB4BB5 /* DSEmptyState.swift in Sources */,
+				F7074F797C2DF1EACC4C3B54 /* DSRow.swift in Sources */,
+				D27CE449E3FE50F01A2A2FEB /* DSProgressDots.swift in Sources */,
+				7ADF2FA33FC5D5C5DCDB83E8 /* DSCalendarWeeks.swift in Sources */,
+				2E234D1393F25AA3A2AE7602 /* DSSkeleton.swift in Sources */,
+				C00E437D810A32A9EF865259 /* DSShadow.swift in Sources */,
+				82134979F20173A2ABD9FD3B /* DSSeparator.swift in Sources */,
+				09E8C92C05015896F4150488 /* SignInView.swift in Sources */,
+				72F2BEE9FEFC2C88D0E0FEB6 /* OnboardingShell.swift in Sources */,
+				2E40DF18A4A7725863E50700 /* WelcomeView.swift in Sources */,
+				79D85A52B8350DF4519B45B7 /* ConnectMonzoView.swift in Sources */,
+				574FE9750FE60F0854458EEE /* GoalSelectionView.swift in Sources */,
+				3B90742BC9B6282F8BE812F7 /* MainTabView.swift in Sources */,
+				0586495811561F9BBEF91DE2 /* HomeView.swift in Sources */,
+				FD3F8AF4D9AF4FE2D6D44119 /* InsightsListView.swift in Sources */,
+				928911E1035354538F9B90BD /* InsightDetailView.swift in Sources */,
+				A148731D2999EAC1DF90E89E /* GoalsListView.swift in Sources */,
+				B2BED30400F7E4396829A727 /* GoalDetailView.swift in Sources */,
+				A3C0CB43B438FF74D0ACE3BB /* BreakthroughsListView.swift in Sources */,
+				AA02A05A0E78E0FC13BCAF26 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

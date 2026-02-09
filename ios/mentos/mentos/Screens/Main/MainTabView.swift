@@ -9,6 +9,8 @@ struct MainTabView: View {
                 .tabItem { Label("Insights", systemImage: "tray") }
             NavigationStack { GoalsListView() }
                 .tabItem { Label("Goals", systemImage: "target") }
+            NavigationStack { BreakthroughsListView() }
+                .tabItem { Label("Breakthroughs", systemImage: "sparkles") }
             NavigationStack { SettingsView() }
                 .tabItem { Label("Settings", systemImage: "gear") }
         }

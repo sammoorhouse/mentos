@@ -7,7 +7,11 @@ struct RootView: View {
     var body: some View {
         Group {
             if !isSignedIn {
-                SignInView { isSignedIn = true }
+                SignInView { result in
+                    if case .success = result {
+                        isSignedIn = true
+                    }
+                }
             } else if onboardingStep != .done {
                 onboardingFlow
                     .transition(.opacity.combined(with: .move(edge: .trailing)))
