@@ -1,0 +1,6 @@
+[
+  {"id":"q1","amount":1000,"timestamp":"2025-01-15T12:00:00+00:00","category":"delivery"},
+  {"id":"q2","amount":1000,"timestamp":"2025-02-15T12:00:00+00:00","category":"delivery"},
+  {"id":"q3","amount":1000,"timestamp":"2025-03-15T12:00:00+00:00","category":"delivery"},
+  {"id":"q4","amount":500,"timestamp":"2025-04-15T12:00:00+00:00","category":"delivery"}
+]

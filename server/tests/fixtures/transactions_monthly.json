@@ -1,0 +1,5 @@
+[
+  {"id":"m1","amount":1000,"timestamp":"2025-01-10T12:00:00+00:00","category":"delivery"},
+  {"id":"m2","amount":1500,"timestamp":"2025-01-11T12:00:00+00:00","category":"delivery"},
+  {"id":"m3","amount":1000,"timestamp":"2025-02-10T12:00:00+00:00","category":"delivery"}
+]

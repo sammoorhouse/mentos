@@ -9,6 +9,7 @@ from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
 
 from app.api import admin, auth, devices, health, monzo, read
+from app.api.routes import timeline
 from app.core.config import get_settings
 from app.db.session import Base, engine
 
@@ -37,3 +38,4 @@ app.include_router(monzo.router)
 app.include_router(read.router)
 app.include_router(admin.router)
 app.include_router(health.router)
+app.include_router(timeline.router)
