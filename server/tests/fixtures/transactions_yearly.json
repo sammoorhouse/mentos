@@ -1,0 +1,5 @@
+[
+  {"id":"y1","amount":1000,"timestamp":"2024-03-01T12:00:00+00:00","category":"groceries"},
+  {"id":"y2","amount":1200,"timestamp":"2024-07-01T12:00:00+00:00","category":"delivery"},
+  {"id":"y3","amount":800,"timestamp":"2024-10-01T12:00:00+00:00","category":"groceries"}
+]

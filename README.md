@@ -200,3 +200,19 @@ Manual fallback:
 fly ssh console -C "cd /app && alembic upgrade head" --app <your-app-name>
 ```
 
+
+
+## Timeline API
+
+Server-side timeline generation is now centralized behind deterministic aggregation (no LLM dependency).
+
+### Endpoints
+- `GET /timeline?cursor=&limit=`: returns a stable, versioned timeline feed with events including streaks, weekly progress, monthly framing, quarterly review, year review, and breakthroughs.
+- `POST /timeline/actions`: handles timeline actions such as `accept_targets` (persists suggested targets) and `open_goal_realign` (server no-op + audit).
+
+### Timeline event contract
+Each event includes:
+- `id`, `type`, `occurred_at`, `title`, `body`, `priority`, `schema_version`
+- `meta` (type-specific payload), `evidence` (`transaction_ids`, `date_range`, metrics), and `actions`
+
+Timezone handling defaults to `Europe/London` unless user profile preferences expose a timezone.

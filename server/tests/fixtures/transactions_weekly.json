@@ -1,0 +1,6 @@
+[
+  {"id":"w1","amount":500,"timestamp":"2025-01-06T12:00:00+00:00","category":"groceries"},
+  {"id":"w2","amount":4000,"timestamp":"2025-01-07T12:00:00+00:00","category":"groceries"},
+  {"id":"w3","amount":500,"timestamp":"2025-01-08T12:00:00+00:00","category":"delivery"},
+  {"id":"w4","amount":500,"timestamp":"2025-01-09T12:00:00+00:00","category":"groceries"}
+]
