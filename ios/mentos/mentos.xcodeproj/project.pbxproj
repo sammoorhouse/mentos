@@ -39,6 +39,25 @@
 		B2BED30400F7E4396829A727 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FCF6A85231E4008A3CD2E /* Screens/Goals/GoalDetailView.swift */; };
 		A3C0CB43B438FF74D0ACE3BB /* BreakthroughsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6714C12DB75CADD4FA6C7CDF /* Screens/Breakthroughs/BreakthroughsListView.swift */; };
 		AA02A05A0E78E0FC13BCAF26 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F91A6C9FE6178C37239283 /* Screens/Settings/SettingsView.swift */; };
+		8455933ECD8184F5A4880991 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8364C7505070312ED4B30591 /* DesignSystem/Tokens.swift */; };
+		F8DDF4E6C8183327D91676BA /* Surface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E6F713A1D2169779F09C7C /* DesignSystem/Surface.swift */; };
+		BFA456E943CBADA6FC235AC3 /* RailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C958A4E8D8CF1C8CBD064 /* DesignSystem/RailScreen.swift */; };
+		10F32913BE2C7321D8A37AE9 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D98037E2190A8CE1D0B30DF /* DesignSystem/Motion.swift */; };
+		9A2249A5A2877A1470AE2AA1 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC72B0C4036E684FBA9BA18 /* DesignSystem/Typography.swift */; };
+		64D72F30AB0184D7858C239A /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413126D6EC36712BBD40822 /* Timeline/TimelineView.swift */; };
+		E5A7AC9D7F1F2C4F4400E4CD /* TimelineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D22AF70961C309F275F65C5 /* Timeline/TimelineEvent.swift */; };
+		550331D3AD007377A1D9EA51 /* TimelineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0837098FA086EC52F84A27 /* Timeline/TimelineStore.swift */; };
+		CBEDE95AA64B8DF486981187 /* TimelineCardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D2420F78B2251830A09745 /* Timeline/TimelineCardFactory.swift */; };
+		75CD7E127774A7AE2757ECCA /* StatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718203D267B22ECCF6E1D5E8 /* Timeline/Cards/StatusCard.swift */; };
+		E4E2A92F0E865108E08B2A65 /* WeeklyProgressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26560E19864022C2385FF175 /* Timeline/Cards/WeeklyProgressCard.swift */; };
+		E23BF735517F681E0FE6FE5A /* InsightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D6EC96375798E0EE2004E3 /* Timeline/Cards/InsightCard.swift */; };
+		58BBC36F57ED35F1B4C64870 /* GoalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9390E07AB6E659CCC6C48633 /* Timeline/Cards/GoalCard.swift */; };
+		B74EC8A4ADA20FCB92839CF8 /* BreakthroughCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDEB695A0701EB72D2EAF23 /* Timeline/Cards/BreakthroughCard.swift */; };
+		A02951B4F5E2AB8D9556D00C /* EmptyStateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D71C58DCF4B5CF60EFBBCD /* Timeline/Cards/EmptyStateCard.swift */; };
+		3CD63481E6EFB27E4F33DC05 /* FireworksOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C9C604E36169286B81B89 /* Celebration/FireworksOverlay.swift */; };
+		134BDD07CE41D2250B1002D7 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04C013465493F507AC50EF /* Celebration/Haptics.swift */; };
+		8E651558597ABD35F23B0221 /* GoalRealignSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921037F51DAD0E57FFF10D2B /* Goals/GoalRealignSheet.swift */; };
+		9ECC42BEADD4F0E8F3CC0ADA /* GoalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FA139EEEDC503E8C1A7447 /* Goals/GoalPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +95,25 @@
 		DD7FCF6A85231E4008A3CD2E /* Screens/Goals/GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Goals/GoalDetailView.swift; sourceTree = "<group>"; };
 		6714C12DB75CADD4FA6C7CDF /* Screens/Breakthroughs/BreakthroughsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Breakthroughs/BreakthroughsListView.swift; sourceTree = "<group>"; };
 		20F91A6C9FE6178C37239283 /* Screens/Settings/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Settings/SettingsView.swift; sourceTree = "<group>"; };
+		8364C7505070312ED4B30591 /* DesignSystem/Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/Tokens.swift; sourceTree = "<group>"; };
+		38E6F713A1D2169779F09C7C /* DesignSystem/Surface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/Surface.swift; sourceTree = "<group>"; };
+		742C958A4E8D8CF1C8CBD064 /* DesignSystem/RailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/RailScreen.swift; sourceTree = "<group>"; };
+		6D98037E2190A8CE1D0B30DF /* DesignSystem/Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/Motion.swift; sourceTree = "<group>"; };
+		9BC72B0C4036E684FBA9BA18 /* DesignSystem/Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/Typography.swift; sourceTree = "<group>"; };
+		6413126D6EC36712BBD40822 /* Timeline/TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineView.swift; sourceTree = "<group>"; };
+		3D22AF70961C309F275F65C5 /* Timeline/TimelineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineEvent.swift; sourceTree = "<group>"; };
+		FF0837098FA086EC52F84A27 /* Timeline/TimelineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineStore.swift; sourceTree = "<group>"; };
+		B4D2420F78B2251830A09745 /* Timeline/TimelineCardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineCardFactory.swift; sourceTree = "<group>"; };
+		718203D267B22ECCF6E1D5E8 /* Timeline/Cards/StatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/StatusCard.swift; sourceTree = "<group>"; };
+		26560E19864022C2385FF175 /* Timeline/Cards/WeeklyProgressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/WeeklyProgressCard.swift; sourceTree = "<group>"; };
+		C9D6EC96375798E0EE2004E3 /* Timeline/Cards/InsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/InsightCard.swift; sourceTree = "<group>"; };
+		9390E07AB6E659CCC6C48633 /* Timeline/Cards/GoalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/GoalCard.swift; sourceTree = "<group>"; };
+		CFDEB695A0701EB72D2EAF23 /* Timeline/Cards/BreakthroughCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/BreakthroughCard.swift; sourceTree = "<group>"; };
+		61D71C58DCF4B5CF60EFBBCD /* Timeline/Cards/EmptyStateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/EmptyStateCard.swift; sourceTree = "<group>"; };
+		5E4C9C604E36169286B81B89 /* Celebration/FireworksOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebration/FireworksOverlay.swift; sourceTree = "<group>"; };
+		FB04C013465493F507AC50EF /* Celebration/Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebration/Haptics.swift; sourceTree = "<group>"; };
+		921037F51DAD0E57FFF10D2B /* Goals/GoalRealignSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals/GoalRealignSheet.swift; sourceTree = "<group>"; };
+		B0FA139EEEDC503E8C1A7447 /* Goals/GoalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals/GoalPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +168,25 @@
 				DD7FCF6A85231E4008A3CD2E /* Screens/Goals/GoalDetailView.swift */,
 				6714C12DB75CADD4FA6C7CDF /* Screens/Breakthroughs/BreakthroughsListView.swift */,
 				20F91A6C9FE6178C37239283 /* Screens/Settings/SettingsView.swift */,
+				8364C7505070312ED4B30591 /* DesignSystem/Tokens.swift */,
+				38E6F713A1D2169779F09C7C /* DesignSystem/Surface.swift */,
+				742C958A4E8D8CF1C8CBD064 /* DesignSystem/RailScreen.swift */,
+				6D98037E2190A8CE1D0B30DF /* DesignSystem/Motion.swift */,
+				9BC72B0C4036E684FBA9BA18 /* DesignSystem/Typography.swift */,
+				6413126D6EC36712BBD40822 /* Timeline/TimelineView.swift */,
+				3D22AF70961C309F275F65C5 /* Timeline/TimelineEvent.swift */,
+				FF0837098FA086EC52F84A27 /* Timeline/TimelineStore.swift */,
+				B4D2420F78B2251830A09745 /* Timeline/TimelineCardFactory.swift */,
+				718203D267B22ECCF6E1D5E8 /* Timeline/Cards/StatusCard.swift */,
+				26560E19864022C2385FF175 /* Timeline/Cards/WeeklyProgressCard.swift */,
+				C9D6EC96375798E0EE2004E3 /* Timeline/Cards/InsightCard.swift */,
+				9390E07AB6E659CCC6C48633 /* Timeline/Cards/GoalCard.swift */,
+				CFDEB695A0701EB72D2EAF23 /* Timeline/Cards/BreakthroughCard.swift */,
+				61D71C58DCF4B5CF60EFBBCD /* Timeline/Cards/EmptyStateCard.swift */,
+				5E4C9C604E36169286B81B89 /* Celebration/FireworksOverlay.swift */,
+				FB04C013465493F507AC50EF /* Celebration/Haptics.swift */,
+				921037F51DAD0E57FFF10D2B /* Goals/GoalRealignSheet.swift */,
+				B0FA139EEEDC503E8C1A7447 /* Goals/GoalPicker.swift */,
 				D3F80565C6CAA07479111232 /* Assets.xcassets */,
 				8F9EDABC149CC7A468786974 /* Preview Content */,
 				4962839057D055453C727185 /* Info.plist */,
@@ -253,6 +310,26 @@
 				B2BED30400F7E4396829A727 /* GoalDetailView.swift in Sources */,
 				A3C0CB43B438FF74D0ACE3BB /* BreakthroughsListView.swift in Sources */,
 				AA02A05A0E78E0FC13BCAF26 /* SettingsView.swift in Sources */,
+				8455933ECD8184F5A4880991 /* Tokens.swift in Sources */,
+				F8DDF4E6C8183327D91676BA /* Surface.swift in Sources */,
+				BFA456E943CBADA6FC235AC3 /* RailScreen.swift in Sources */,
+				10F32913BE2C7321D8A37AE9 /* Motion.swift in Sources */,
+				9A2249A5A2877A1470AE2AA1 /* Typography.swift in Sources */,
+				64D72F30AB0184D7858C239A /* TimelineView.swift in Sources */,
+				E5A7AC9D7F1F2C4F4400E4CD /* TimelineEvent.swift in Sources */,
+				550331D3AD007377A1D9EA51 /* TimelineStore.swift in Sources */,
+				CBEDE95AA64B8DF486981187 /* TimelineCardFactory.swift in Sources */,
+				75CD7E127774A7AE2757ECCA /* StatusCard.swift in Sources */,
+				E4E2A92F0E865108E08B2A65 /* WeeklyProgressCard.swift in Sources */,
+				E23BF735517F681E0FE6FE5A /* InsightCard.swift in Sources */,
+				58BBC36F57ED35F1B4C64870 /* GoalCard.swift in Sources */,
+				B74EC8A4ADA20FCB92839CF8 /* BreakthroughCard.swift in Sources */,
+				A02951B4F5E2AB8D9556D00C /* EmptyStateCard.swift in Sources */,
+				3CD63481E6EFB27E4F33DC05 /* FireworksOverlay.swift in Sources */,
+				134BDD07CE41D2250B1002D7 /* Haptics.swift in Sources */,
+				8E651558597ABD35F23B0221 /* GoalRealignSheet.swift in Sources */,
+				9ECC42BEADD4F0E8F3CC0ADA /* GoalPicker.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

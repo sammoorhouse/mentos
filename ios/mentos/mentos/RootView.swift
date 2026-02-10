@@ -16,12 +16,14 @@ struct RootView: View {
                 onboardingFlow
                     .transition(.opacity.combined(with: .move(edge: .trailing)))
             } else {
-                MainTabView()
+                NavigationStack {
+                    TimelineView()
+                }
             }
         }
-        .tint(.accentColor)
-        .animation(DS.Animation.spring, value: isSignedIn)
-        .animation(DS.Animation.spring, value: onboardingStep)
+        .tint(Tokens.Color.accent)
+        .animation(Motion.default, value: isSignedIn)
+        .animation(Motion.default, value: onboardingStep)
     }
 
     @ViewBuilder

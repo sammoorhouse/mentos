@@ -3,19 +3,37 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         ScrollView {
-            DSConstrainedContent {
-                VStack(spacing: DSSpacing.l) {
-                    DSCard(title: "Debug") {
+            VStack(spacing: Tokens.Spacing.l) {
+                Surface {
+                    VStack(alignment: .leading, spacing: Tokens.Spacing.s) {
+                        Text("Debug")
+                            .font(Typography.caption)
+                            .foregroundStyle(Tokens.Color.textTertiary)
                         Text("Server: http://localhost:8000")
-                            .font(.dsMonospace)
+                            .font(Typography.metric)
+                            .foregroundStyle(Tokens.Color.textSecondary)
                     }
-                    DSButton(title: "Disconnect Monzo", variant: .secondary, action: {})
-                    DSButton(title: "Sign out", variant: .destructive, action: {})
                 }
-                .padding(DSSpacing.l)
+                Surface {
+                    VStack(spacing: Tokens.Spacing.s) {
+                        button("Disconnect Monzo", fill: Tokens.Color.surface2, text: Tokens.Color.textSecondary)
+                        button("Sign out", fill: Tokens.Color.accent.opacity(0.85), text: Tokens.Color.background)
+                    }
+                }
             }
+            .padding(Tokens.Spacing.l)
         }
-        .background(DS.Color.background)
+        .background(Tokens.Color.background)
         .navigationTitle("Settings")
+    }
+
+    private func button(_ title: String, fill: Color, text: Color) -> some View {
+        Text(title)
+            .font(Typography.body)
+            .foregroundStyle(text)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, Tokens.Spacing.m)
+            .background(fill)
+            .clipShape(Capsule())
     }
 }
