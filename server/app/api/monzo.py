@@ -2,6 +2,8 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import RedirectResponse
+from urllib.parse import quote
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -29,6 +31,14 @@ def connect_start(user: User = Depends(require_user), db: Session = Depends(get_
     )
     db.commit()
     return {"authUrl": build_auth_url(state_id, challenge), "stateId": state_id}
+
+
+@router.get("/connect/callback")
+def connect_callback(code: str | None = None, state: str | None = None):
+    if not code or not state:
+        return RedirectResponse(url="mentos://oauth/monzo?error=missing_params")
+    redirect_url = f"mentos://oauth/monzo?code={quote(code)}&state={quote(state)}"
+    return RedirectResponse(url=redirect_url)
 
 
 class CompleteIn(BaseModel):

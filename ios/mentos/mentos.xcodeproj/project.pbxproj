@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		040F698C10B68302AF02A561 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4422B2B55FDE245C5DC2DB7A /* App.swift */; };
 		1B8C5E9791786BE1DBF7AB7F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A8BBB968E3C1A4376B208 /* RootView.swift */; };
+		41B9F9B4D0E24E3896EBFBD3 /* Breakthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897261C460C46F0B4D882A6 /* Breakthrough.swift */; };
+		4A0DDE8909A4464FA91E534A /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40009123D4441348E23EF8E /* Insight.swift */; };
+		4A399BFA92B54FD7A56AB30A /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3DED158A90443B8134DBE0 /* Goal.swift */; };
 		AFC9AFA12932A45876E96B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F80565C6CAA07479111232 /* Assets.xcassets */; };
 		DCC2525CF9D08F00256ABE13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */; };
+		E40C65AEE5994D46A0ED5589 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1034DBC24D4EB6BF46900A /* APIClient.swift */; };
+		E4163A831D81412EB0B561B4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DD3538FD3644CBA3AC3B58 /* OnboardingCoordinator.swift */; };
 		F0279779BBF775E46EDBF6A4 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A92E6703590122B4FA95551 /* SessionStore.swift */; };
 		EECB6C67CFB512E9E3E19339 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BEC574EAB13C26531BD21 /* DesignSystem/DS.swift */; };
 		91DB58A704E9CBD0E67F8096 /* DSTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532F4A72C4BC8D7F0D7E81B1 /* DesignSystem/DSTypography.swift */; };
@@ -58,15 +63,34 @@
 		134BDD07CE41D2250B1002D7 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04C013465493F507AC50EF /* Celebration/Haptics.swift */; };
 		8E651558597ABD35F23B0221 /* GoalRealignSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921037F51DAD0E57FFF10D2B /* Goals/GoalRealignSheet.swift */; };
 		9ECC42BEADD4F0E8F3CC0ADA /* GoalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FA139EEEDC503E8C1A7447 /* Goals/GoalPicker.swift */; };
+		F20FEE4F663F4730B2AB689E /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5318C4397F43F0B0E6190E /* TokenStore.swift */; };
+		F4F703E26BDB4BD390110DD7 /* MonzoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2C0A3F761A4998AC6A715D /* MonzoStatus.swift */; };
+		F6BFD5B7B59C4A1C8771BBD4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C9E253CDF9491882853D75 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04CA97ABD0DF0C7637613F1C /* mentos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = mentos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15B47642447F4BCAA46045FF /* ConnectMonzoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectMonzoView.swift; sourceTree = "<group>"; };
+		22CEAC4E2F3932180089A871 /* mentos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mentos.entitlements; sourceTree = "<group>"; };
+		2897261C460C46F0B4D882A6 /* Breakthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breakthrough.swift; sourceTree = "<group>"; };
+		3184A720F2C545EB9C2E3A4E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		39B660BE4C8B4D9184640CB7 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4422B2B55FDE245C5DC2DB7A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		4962839057D055453C727185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C7C21E325BB4B4293A17B0A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		78C9E253CDF9491882853D75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		88F0F1FCF9D1442DA0EED44B /* GoalsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsListView.swift; sourceTree = "<group>"; };
 		8A92E6703590122B4FA95551 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		8D8C565ACB42459C9F5373F4 /* GoalSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSelectionView.swift; sourceTree = "<group>"; };
+		96EBACD76E0A421C971C3C66 /* InsightsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsListView.swift; sourceTree = "<group>"; };
+		9A1034DBC24D4EB6BF46900A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		A08675F724E4475E81B0DB08 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		A1DD3538FD3644CBA3AC3B58 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		A20BE7D8F5C95B15A7E9177D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C8054B7DF0094A92A02191A6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		CB2C0A3F761A4998AC6A715D /* MonzoStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoStatus.swift; sourceTree = "<group>"; };
 		D3F80565C6CAA07479111232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D40009123D4441348E23EF8E /* Insight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
 		D43A8BBB968E3C1A4376B208 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		6C9BEC574EAB13C26531BD21 /* DesignSystem/DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DS.swift; sourceTree = "<group>"; };
 		532F4A72C4BC8D7F0D7E81B1 /* DesignSystem/DSTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/DSTypography.swift; sourceTree = "<group>"; };
@@ -114,6 +138,8 @@
 		FB04C013465493F507AC50EF /* Celebration/Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebration/Haptics.swift; sourceTree = "<group>"; };
 		921037F51DAD0E57FFF10D2B /* Goals/GoalRealignSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals/GoalRealignSheet.swift; sourceTree = "<group>"; };
 		B0FA139EEEDC503E8C1A7447 /* Goals/GoalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals/GoalPicker.swift; sourceTree = "<group>"; };
+		DE5318C4397F43F0B0E6190E /* TokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
+		FF3DED158A90443B8134DBE0 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +164,7 @@
 		35FD33EF26331B8C6239A8F3 /* mentos */ = {
 			isa = PBXGroup;
 			children = (
+				22CEAC4E2F3932180089A871 /* mentos.entitlements */,
 				4422B2B55FDE245C5DC2DB7A /* App.swift */,
 				D43A8BBB968E3C1A4376B208 /* RootView.swift */,
 				8A92E6703590122B4FA95551 /* SessionStore.swift */,
@@ -187,11 +214,48 @@
 				FB04C013465493F507AC50EF /* Celebration/Haptics.swift */,
 				921037F51DAD0E57FFF10D2B /* Goals/GoalRealignSheet.swift */,
 				B0FA139EEEDC503E8C1A7447 /* Goals/GoalPicker.swift */,
+				D907AE352D994169AD68C69A /* Networking */,
+				94EF804D39EF47E8B10DCD26 /* Auth */,
+				9C3080F9B4EB4BD6B0632316 /* Onboarding */,
+				A9960C1A40DA4AAAB4D1D435 /* Main */,
+				A11D4515120C4C4D89C57D77 /* Goals */,
+				4EDA91F172464777AEEDC266 /* Insights */,
+				406F88A591FC45BC9FC80664 /* Settings */,
+				4440E16A25894B6B8D51DA4E /* Models */,
 				D3F80565C6CAA07479111232 /* Assets.xcassets */,
 				8F9EDABC149CC7A468786974 /* Preview Content */,
 				4962839057D055453C727185 /* Info.plist */,
 			);
 			path = mentos;
+			sourceTree = "<group>";
+		};
+		406F88A591FC45BC9FC80664 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5C7C21E325BB4B4293A17B0A /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4440E16A25894B6B8D51DA4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				78C9E253CDF9491882853D75 /* User.swift */,
+				FF3DED158A90443B8134DBE0 /* Goal.swift */,
+				D40009123D4441348E23EF8E /* Insight.swift */,
+				2897261C460C46F0B4D882A6 /* Breakthrough.swift */,
+				CB2C0A3F761A4998AC6A715D /* MonzoStatus.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4EDA91F172464777AEEDC266 /* Insights */ = {
+			isa = PBXGroup;
+			children = (
+				96EBACD76E0A421C971C3C66 /* InsightsListView.swift */,
+				E6767617D9EB4E97A00478D6 /* InsightDetailView.swift */,
+			);
+			path = Insights;
 			sourceTree = "<group>";
 		};
 		8F9EDABC149CC7A468786974 /* Preview Content */ = {
@@ -202,12 +266,57 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		94EF804D39EF47E8B10DCD26 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DE5318C4397F43F0B0E6190E /* TokenStore.swift */,
+				3184A720F2C545EB9C2E3A4E /* SignInView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9C3080F9B4EB4BD6B0632316 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A1DD3538FD3644CBA3AC3B58 /* OnboardingCoordinator.swift */,
+				A08675F724E4475E81B0DB08 /* WelcomeView.swift */,
+				15B47642447F4BCAA46045FF /* ConnectMonzoView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		9CCE2E1638057CBF63C6B466 = {
 			isa = PBXGroup;
 			children = (
 				35FD33EF26331B8C6239A8F3 /* mentos */,
 				2A8DB4351756D33C9E160CD8 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		A11D4515120C4C4D89C57D77 /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				8D8C565ACB42459C9F5373F4 /* GoalSelectionView.swift */,
+				88F0F1FCF9D1442DA0EED44B /* GoalsListView.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		A9960C1A40DA4AAAB4D1D435 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				39B660BE4C8B4D9184640CB7 /* MainTabView.swift */,
+				C8054B7DF0094A92A02191A6 /* HomeView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D907AE352D994169AD68C69A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9A1034DBC24D4EB6BF46900A /* APIClient.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +391,14 @@
 			files = (
 				040F698C10B68302AF02A561 /* App.swift in Sources */,
 				1B8C5E9791786BE1DBF7AB7F /* RootView.swift in Sources */,
+				4A0DDE8909A4464FA91E534A /* Insight.swift in Sources */,
+				4A399BFA92B54FD7A56AB30A /* Goal.swift in Sources */,
+				E40C65AEE5994D46A0ED5589 /* APIClient.swift in Sources */,
+				E4163A831D81412EB0B561B4 /* OnboardingCoordinator.swift in Sources */,
+				F20FEE4F663F4730B2AB689E /* TokenStore.swift in Sources */,
+				F4F703E26BDB4BD390110DD7 /* MonzoStatus.swift in Sources */,
+				F6BFD5B7B59C4A1C8771BBD4 /* User.swift in Sources */,
+				41B9F9B4D0E24E3896EBFBD3 /* Breakthrough.swift in Sources */,
 				F0279779BBF775E46EDBF6A4 /* SessionStore.swift in Sources */,
 				EECB6C67CFB512E9E3E19339 /* DS.swift in Sources */,
 				91DB58A704E9CBD0E67F8096 /* DSTypography.swift in Sources */,
@@ -392,12 +509,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = mentos/mentos.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "mentos/Preview Content";
+				DEVELOPMENT_ASSET_PATHS = "\"mentos/Preview Content\"";
 				DEVELOPMENT_TEAM = RK8KUSS6D5;
 				INFOPLIST_FILE = mentos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sammoorhouse.mentos.dev;
 				PRODUCT_NAME = mentos;
@@ -410,12 +528,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = mentos/mentos.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "mentos/Preview Content";
+				DEVELOPMENT_ASSET_PATHS = "\"mentos/Preview Content\"";
 				DEVELOPMENT_TEAM = RK8KUSS6D5;
 				INFOPLIST_FILE = mentos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sammoorhouse.mentos.dev;
 				PRODUCT_NAME = mentos;
