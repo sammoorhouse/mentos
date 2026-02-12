@@ -14,7 +14,7 @@ struct DSProgressDots: View {
             ForEach(weeks.suffix(6)) { week in
                 VStack(spacing: DSSpacing.xs) {
                     Circle()
-                        .stroke(.accent.opacity(0.35), lineWidth: week.score == 0 ? 1 : 0)
+                        .stroke(Color.accentColor.opacity(0.35), lineWidth: week.score == 0 ? 1 : 0)
                         .background(Circle().fill(fill(for: week.score)))
                         .frame(width: 12, height: 12)
                     Text(week.weekStart, format: .dateTime.weekday(.narrow))
@@ -29,8 +29,8 @@ struct DSProgressDots: View {
 
     private func fill(for score: Int) -> Color {
         switch score {
-        case 2: return .accent
-        case 1: return .accent.opacity(0.45)
+        case 2: return .accentColor
+        case 1: return Color.accentColor.opacity(0.45)
         default: return .clear
         }
     }

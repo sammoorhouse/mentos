@@ -40,6 +40,6 @@ struct DSCalendarWeeks: View {
     }
 
     private func dotColor(for score: Int) -> Color {
-        score == 2 ? .accent : (score == 1 ? .accent.opacity(0.45) : DS.Color.separator)
+        score == 2 ? .accentColor : (score == 1 ? Color.accentColor.opacity(0.45) : DS.Color.separator)
     }
 }

@@ -11,7 +11,7 @@ struct DSRow: View {
         HStack(spacing: DSSpacing.m) {
             Image(systemName: icon)
                 .frame(width: 22)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
             VStack(alignment: .leading, spacing: DSSpacing.xs) {
                 Text(title).font(.dsBody.weight(.semibold))
                 Text(subtitle).font(.dsCaption).foregroundStyle(DS.Color.textSecondary)

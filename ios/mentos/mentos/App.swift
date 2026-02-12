@@ -30,6 +30,7 @@ struct MentosApp: App {
             OnboardingCoordinator()
                 .environmentObject(session)
                 .onOpenURL { url in session.handleDeepLink(url) }
+                .preferredColorScheme(.dark)
         }
     }
 }

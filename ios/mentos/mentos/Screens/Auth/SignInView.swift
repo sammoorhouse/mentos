@@ -16,7 +16,7 @@ struct SignInView: View {
             }
 
             SignInWithAppleButton(.signIn, onRequest: { _ in }, onCompletion: handleSignIn(result:))
-                .signInWithAppleButtonStyle(.automatic)
+                .signInWithAppleButtonStyle(.black)
                 .frame(height: 48)
                 .clipShape(RoundedRectangle(cornerRadius: DS.Radius.button, style: .continuous))
 
