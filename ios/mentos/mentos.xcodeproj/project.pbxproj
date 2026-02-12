@@ -51,6 +51,7 @@
 		9A2249A5A2877A1470AE2AA1 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC72B0C4036E684FBA9BA18 /* DesignSystem/Typography.swift */; };
 		64D72F30AB0184D7858C239A /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413126D6EC36712BBD40822 /* Timeline/TimelineView.swift */; };
 		E5A7AC9D7F1F2C4F4400E4CD /* TimelineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D22AF70961C309F275F65C5 /* Timeline/TimelineEvent.swift */; };
+		7B6F2C9B4D3A4A9E9D7C2B11 /* TimelineAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4B3A8F2C1D4B7E8A3C9F21 /* Timeline/TimelineAPIModels.swift */; };
 		550331D3AD007377A1D9EA51 /* TimelineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0837098FA086EC52F84A27 /* Timeline/TimelineStore.swift */; };
 		CBEDE95AA64B8DF486981187 /* TimelineCardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D2420F78B2251830A09745 /* Timeline/TimelineCardFactory.swift */; };
 		75CD7E127774A7AE2757ECCA /* StatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718203D267B22ECCF6E1D5E8 /* Timeline/Cards/StatusCard.swift */; };
@@ -126,6 +127,7 @@
 		9BC72B0C4036E684FBA9BA18 /* DesignSystem/Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/Typography.swift; sourceTree = "<group>"; };
 		6413126D6EC36712BBD40822 /* Timeline/TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineView.swift; sourceTree = "<group>"; };
 		3D22AF70961C309F275F65C5 /* Timeline/TimelineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineEvent.swift; sourceTree = "<group>"; };
+		9E4B3A8F2C1D4B7E8A3C9F21 /* Timeline/TimelineAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineAPIModels.swift; sourceTree = "<group>"; };
 		FF0837098FA086EC52F84A27 /* Timeline/TimelineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineStore.swift; sourceTree = "<group>"; };
 		B4D2420F78B2251830A09745 /* Timeline/TimelineCardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/TimelineCardFactory.swift; sourceTree = "<group>"; };
 		718203D267B22ECCF6E1D5E8 /* Timeline/Cards/StatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline/Cards/StatusCard.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				9BC72B0C4036E684FBA9BA18 /* DesignSystem/Typography.swift */,
 				6413126D6EC36712BBD40822 /* Timeline/TimelineView.swift */,
 				3D22AF70961C309F275F65C5 /* Timeline/TimelineEvent.swift */,
+				9E4B3A8F2C1D4B7E8A3C9F21 /* Timeline/TimelineAPIModels.swift */,
 				FF0837098FA086EC52F84A27 /* Timeline/TimelineStore.swift */,
 				B4D2420F78B2251830A09745 /* Timeline/TimelineCardFactory.swift */,
 				718203D267B22ECCF6E1D5E8 /* Timeline/Cards/StatusCard.swift */,
@@ -434,6 +437,7 @@
 				9A2249A5A2877A1470AE2AA1 /* Typography.swift in Sources */,
 				64D72F30AB0184D7858C239A /* TimelineView.swift in Sources */,
 				E5A7AC9D7F1F2C4F4400E4CD /* TimelineEvent.swift in Sources */,
+				7B6F2C9B4D3A4A9E9D7C2B11 /* TimelineAPIModels.swift in Sources */,
 				550331D3AD007377A1D9EA51 /* TimelineStore.swift in Sources */,
 				CBEDE95AA64B8DF486981187 /* TimelineCardFactory.swift in Sources */,
 				75CD7E127774A7AE2757ECCA /* StatusCard.swift in Sources */,

@@ -8,7 +8,7 @@ struct TimelineView: View {
     @State private var celebratedBreakthroughIDs: Set<String> = []
 
     var body: some View {
-        RailScreen(title: "Mentos", statusText: "Monzo connected • Last sync 2h ago") {
+        RailScreen(title: "Mentos", statusText: store.statusText) {
             LazyVStack(alignment: .leading, spacing: Tokens.Spacing.l) {
                 ForEach(store.events) { event in
                     TimelineCardFactory.makeCard(

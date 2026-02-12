@@ -73,6 +73,15 @@ final class APIClient {
         try await request("/monzo/status")
     }
 
+    func getTimeline(cursor: String? = nil, limit: Int = 50) async throws -> TimelinePageDTO {
+        var query: [String] = ["limit=\(limit)"]
+        if let cursor, !cursor.isEmpty {
+            query.append("cursor=\(cursor)")
+        }
+        let path = "/timeline" + (query.isEmpty ? "" : "?\(query.joined(separator: "&"))")
+        return try await request(path)
+    }
+
     func startMonzoConnect() async throws -> MonzoConnectStartResponse {
         try await request("/monzo/connect/start")
     }
