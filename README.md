@@ -1,6 +1,7 @@
 # mentos v0.1 (Python server + iOS scaffold)
 
 This repo now includes:
+
 - Existing insight-card library and validator pipeline (`src/mentos`, `insights/cards`)
 - New FastAPI multi-user backend (`server/app`)
 - APScheduler worker process (`python -m app.workers.run`)
@@ -137,6 +138,7 @@ cp server/.env.deploy.example server/.env.deploy
 ```
 
 Fill all required variables:
+
 - `FLY_APP_NAME`
 - `DATABASE_URL`
 - `JWT_SECRET`
@@ -200,18 +202,18 @@ Manual fallback:
 fly ssh console -C "cd /app && alembic upgrade head" --app <your-app-name>
 ```
 
-
-
 ## Timeline API
 
 Server-side timeline generation is now centralized behind deterministic aggregation (no LLM dependency).
 
 ### Endpoints
+
 - `GET /timeline?cursor=&limit=`: returns a stable, versioned timeline feed with events including streaks, weekly progress, monthly framing, quarterly review, year review, and breakthroughs.
 - `POST /timeline/actions`: handles timeline actions such as `accept_targets` (persists suggested targets) and `open_goal_realign` (server no-op + audit).
 
 ### Timeline event contract
 Each event includes:
+
 - `id`, `type`, `occurred_at`, `title`, `body`, `priority`, `schema_version`
 - `meta` (type-specific payload), `evidence` (`transaction_ids`, `date_range`, metrics), and `actions`
 
